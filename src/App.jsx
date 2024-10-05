@@ -14,6 +14,7 @@ import Contact from "./pages/contact/Contact";
 
 // Css Main Style Sheet
 import "./App.css";
+import NotFound from "./pages/not-found/NotFound";
 
 export default function App() {
   const router = createBrowserRouter(
@@ -23,6 +24,8 @@ export default function App() {
         <Route path="contact" element={<Contact />} />
         <Route path="about" element={<About />} />
         <Route path="sign-up" element={<SignUp />} />
+
+        <Route path="*" element={<NotFound />} />
       </Route>
     )
   );
