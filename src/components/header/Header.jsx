@@ -179,7 +179,7 @@ export default function Header() {
       <Stack
         className="nav-icons"
         direction={"row"}
-        justifyContent={smallScreens ? "space-around" : "space-between"}
+        justifyContent={"space-between"}
         alignItems={"center"}
       >
         {smallScreens && (
