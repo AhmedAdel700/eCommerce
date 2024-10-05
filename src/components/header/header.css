@@ -1,0 +1,170 @@
+.active-link {
+  position: relative;
+}
+
+.active-link::after {
+  content: "";
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 75%;
+  height: 2px;
+  background-color: #000;
+}
+
+header {
+  position: relative;
+}
+
+header .summer-sale {
+  width: 100vw;
+  height: 48px;
+  background-color: #000;
+  color: #fafafa;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 0 var(--main-padding);
+  font-size: 14px;
+
+  & p span {
+    color: white;
+    font-weight: 600;
+    margin-left: 10px;
+    cursor: pointer;
+  }
+}
+
+header .summer-sale .lang {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+header .nav-icons {
+  padding: 40px var(--main-padding) 14px;
+  border-bottom: 2px solid #f5f5f5;
+}
+
+header .exclusive {
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  line-height: 2.4;
+}
+
+header nav {
+  display: flex;
+  gap: 40px;
+}
+
+header nav a {
+  line-height: 2.4;
+  position: relative;
+  padding: 2.5px 12.5px;
+  border-radius: 4px;
+  transition: 0.35s;
+}
+
+header nav a:hover {
+  background-color: #f5f5f5;
+}
+
+header .controls {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+
+  & .search {
+    position: relative;
+    width: 243px;
+    height: 38px;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+
+    & input {
+      width: 100%;
+      height: 100%;
+      padding: 0 15px;
+      border: none;
+      outline: none;
+      background-color: transparent;
+    }
+
+    & .search-i {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 15px;
+      width: 28px;
+      height: 28px;
+      cursor: pointer;
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .palce-holder {
+    display: none;
+  }
+
+  .summer-sale {
+    padding: 0 15px !important;
+
+    & p {
+      font-size: 0.8rem;
+    }
+  }
+
+  header .nav-icons {
+    padding: 15px !important;
+    border-bottom: 1px solid #f5f5f5;
+  }
+
+  header nav a {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .summer-sale {
+    padding: 0 10px;
+
+    & p {
+      font-size: 0.66rem;
+    }
+  }
+
+  header nav {
+    position: absolute;
+    left: 0;
+    top: 100%;
+    background-color: var(--dark-color);
+    color: var(--text-color);
+    width: 100%;
+    height: fit-content;
+    z-index: 100;
+    flex-direction: column;
+    gap: 5px;
+    transition: 0.5s !important;
+  }
+
+  header .controls {
+    gap: 10px;
+
+    & .search {
+      position: relative;
+      width: 200px;
+      height: 38px;
+
+      & .search-i {
+        right: 0px;
+        width: 27px;
+        height: 27px;
+      }
+    }
+  }
+}
