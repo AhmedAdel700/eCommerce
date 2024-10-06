@@ -15,10 +15,11 @@
 
 header {
   position: relative;
+  max-width: 100vw;
 }
 
 header .summer-sale {
-  width: 100vw;
+  max-width: 100vw;
   height: 48px;
   background-color: #000;
   color: #fafafa;
