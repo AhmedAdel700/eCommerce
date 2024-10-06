@@ -1,5 +1,5 @@
 footer {
-  min-height: 50vh;
+  min-height: 55vh;
   max-width: 100vw;
   background-color: #000;
   color: white;
@@ -7,10 +7,49 @@ footer {
   justify-content: center;
   align-items: center;
   padding: 1.5rem;
+  position: relative;
 }
 
 footer p,
 h3,
 h4 {
+  cursor: pointer;
+}
+
+.icons-footer {
+  cursor: pointer;
+}
+
+.copyright {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  position: absolute;
+  bottom: 0.5rem;
+  padding: 0.8rem;
+  border-top: 1px solid #7d8184;
+  width: 100%;
+  color: #7d8184;
+  font-size: 0.8rem;
+}
+
+.final-email {
+  background-color: transparent;
+  outline: none;
+  border: 2px solid white;
+  border-radius: 4px;
+  width: 217px;
+  height: 48px;
+  padding: 0.8rem;
+  color: var(--red-color);
+}
+
+.send-arrow {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
   cursor: pointer;
 }
