@@ -3,6 +3,7 @@ import { Box, Stack } from "@mui/material";
 import CopyrightIcon from "@mui/icons-material/Copyright";
 import SendIcon from "@mui/icons-material/Send";
 import "./footer.css";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
@@ -38,8 +39,12 @@ export default function Footer() {
         <Grid item xs={12} sm={6} md={2} lg={2}>
           <Stack gap={3}>
             <h4>Account</h4>
-            <h5>My Account</h5>
-            <p>Login / Register</p>
+            <Link to="account">
+              <p>My Account</p>
+            </Link>
+            <Link to="sign-up">
+              <p>Login / Register</p>
+            </Link>
             <p>Cart</p>
             <p>Wishlist</p>
             <p>Shop</p>

@@ -155,17 +155,21 @@ header .controls {
   }
 
   header .controls {
-    gap: 10px;
+    gap: 7px;
 
     & .search {
       position: relative;
-      width: 200px;
+      width: 185px;
       height: 38px;
+
+      & input::placeholder {
+        font-size: 12px;
+      }
 
       & .search-i {
         right: 0px;
-        width: 27px;
-        height: 27px;
+        width: 26px;
+        height: 26px;
       }
     }
   }
