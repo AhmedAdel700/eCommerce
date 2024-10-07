@@ -15,8 +15,13 @@ import Contact from "./pages/contact/Contact";
 // Css Main Style Sheet
 import "./App.css";
 import NotFound from "./pages/not-found/NotFound";
+import Account, { loader as accountLoader } from "./pages/account/Account";
+
+import { useSelector } from "react-redux";
 
 export default function App() {
+  const { isAuthenticated } = useSelector((state) => state.auth);
+
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<Layout />}>
@@ -24,6 +29,11 @@ export default function App() {
         <Route path="contact" element={<Contact />} />
         <Route path="about" element={<About />} />
         <Route path="sign-up" element={<SignUp />} />
+        <Route
+          path="account"
+          element={<Account />}
+          loader={() => accountLoader(isAuthenticated)}
+        />
 
         <Route path="*" element={<NotFound />} />
       </Route>

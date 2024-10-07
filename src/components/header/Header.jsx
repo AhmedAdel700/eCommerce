@@ -7,14 +7,15 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import SearchIcon from "@mui/icons-material/Search";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import WidgetsOutlinedIcon from "@mui/icons-material/WidgetsOutlined";
-
+import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import CartLogo from "../CartLogo";
+import { Stack } from "@mui/material";
 
 import { useEffect, useState } from "react";
-import "./header.css";
-import { Stack } from "@mui/material";
 import { Link, useLocation } from "react-router-dom";
-import CartLogo from "../CartLogo";
+import { useSelector } from "react-redux";
+import "./header.css";
 
 const StyledMenu = styled((props) => (
   <Menu
@@ -64,6 +65,8 @@ export default function Header() {
   const smallScreens = useMediaQuery("(max-width:768px)");
 
   let location = useLocation();
+
+  const { isAuthenticated } = useSelector((state) => state.auth);
 
   const [active, setActive] = useState(false);
 
@@ -211,6 +214,23 @@ export default function Header() {
           <FavoriteBorderOutlinedIcon sx={{ cursor: "pointer" }} />
 
           <CartLogo />
+
+          {isAuthenticated && (
+            <Link to="account">
+              <PersonOutlineOutlinedIcon
+                sx={{
+                  backgroundColor: "var(--red-color)",
+                  color: "white",
+                  borderRadius: "50%",
+                  width: "30px",
+                  height: "30px",
+                  padding: "5px",
+                  cursor: "pointer",
+                  marginTop: "4px",
+                }}
+              />
+            </Link>
+          )}
         </Box>
       </Stack>
     </header>

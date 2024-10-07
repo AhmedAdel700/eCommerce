@@ -1,0 +1,13 @@
+.account {
+    padding: 4rem var(--main-padding);
+}
+
+.ul-link {
+  padding-left: 2rem;
+
+  & li {
+    color: var(--text-2-color);
+    font-weight: 500;
+    cursor: pointer;
+  }
+}
