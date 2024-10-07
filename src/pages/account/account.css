@@ -1,5 +1,6 @@
 .account {
-    padding: 4rem var(--main-padding);
+  padding: 4rem var(--main-padding);
+  min-height: fit-content;
 }
 
 .ul-link {
@@ -9,5 +10,139 @@
     color: var(--text-2-color);
     font-weight: 500;
     cursor: pointer;
+    margin-bottom: 0.4rem;
+  }
+}
+
+.account-container {
+  flex-direction: row !important;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-top: 4rem;
+}
+
+.account-left-side {
+  flex-basis: 40%;
+  height: fit-content;
+}
+
+.account-right-side {
+  width: 100%;
+  height: fit-content;
+  padding: 2.5rem 5rem;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  border-radius: 4px;
+}
+
+.account .data-1 {
+  display: grid;
+  grid-template-columns: repeat(2, 500px);
+  gap: 1.5rem 3rem;
+}
+
+.account .data-1 label {
+  font-weight: 500;
+  line-height: 2.4;
+}
+
+.account .data-1 input {
+  width: 500px;
+  height: 50px;
+  padding: 0.8rem 1rem;
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  background-color: #f5f5f5;
+  color: var(--red-color);
+}
+
+.account .data-2 input {
+  width: 100%;
+  height: 50px;
+  padding: 0.8rem 1rem;
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  background-color: #f5f5f5;
+  color: var(--red-color);
+}
+
+.account form .account-btns {
+  flex-direction: row !important;
+  text-transform: capitalize;
+  margin: 1.3rem 0;
+  float: right;
+}
+
+.account form .account-btns button:first-child {
+  color: black;
+  text-transform: capitalize;
+  font-size: 1.3rem;
+  width: 100px;
+  line-height: 2.4;
+  margin: 0 1rem;
+}
+
+.account form .account-btns button:last-child {
+  color: white;
+  background-color: var(--red-color);
+  text-transform: capitalize;
+  font-size: 1rem;
+  width: 214px;
+  height: 56px;
+  line-height: 2.4;
+}
+
+@media (max-width: 1500px) {
+  .account {
+    padding: 1rem !important;
+  }
+
+  .account-container {
+    flex-direction: column !important;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .account-right-side {
+    width: 100%;
+    height: fit-content;
+    padding: 1rem;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    border-radius: 4px;
+  }
+
+  .account .data-1 {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1.5rem 0;
+  }
+
+  .account .data-1 input {
+    width: 100%;
+    height: 50px;
+    padding: 0.8rem 1rem;
+    border: none;
+    outline: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    background-color: #f5f5f5;
+    color: var(--red-color);
+  }
+}
+
+@media (max-width: 768px) {
+  .header-info {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 350px) {
+  .header-info {
+    font-size: 10px;
   }
 }

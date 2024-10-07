@@ -104,8 +104,8 @@ export default function Header() {
 
   const links = [
     { linkName: "Home", path: "/" },
-    { linkName: "About", path: "/about" },
     { linkName: "Contact", path: "/contact" },
+    { linkName: "About", path: "/about" },
     { linkName: "Sign Up", path: "/sign-up" },
   ];
 

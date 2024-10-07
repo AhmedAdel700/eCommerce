@@ -1,4 +1,4 @@
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Button, Stack, Typography } from "@mui/material";
 
 import { Link, redirect } from "react-router-dom";
 import "./account.css";
@@ -17,6 +17,7 @@ export default function Account() {
         direction={"row"}
         alignItems={"center"}
         justifyContent={"space-between"}
+        className="header-info"
       >
         <Stack direction={"row"} alignItems={"center"}>
           <Link
@@ -46,13 +47,7 @@ export default function Account() {
 
       {/* This Is The Main Page Consist Of 2 Sides Left And Right */}
 
-      <Stack
-        direction={"row"}
-        gap={3}
-        alignItems={"center"}
-        justifyContent={"space-between"}
-        mt={10}
-      >
+      <Stack className="account-container">
         {/* This Is The Left Side */}
         <Stack gap={2} className="account-left-side">
           <Box>
@@ -92,10 +87,78 @@ export default function Account() {
 
         {/* This Is The Right Side */}
 
-        <Stack className="account-right-side">
-          <img src="/images/user.png" alt="user-icon" />
-          <p style={{ fontSize: "14px", fontWeight: "500" }}>John Doe</p>
-          <p style={{ fontSize: "14px", fontWeight: "500" }}>User Since 2022</p>
+        <Stack gap={2} className="account-right-side">
+          <Typography
+            sx={{
+              color: "var(--red-color)",
+              fontWeight: "600",
+              fontSize: "1.3rem",
+              lineHeight: "2",
+            }}
+          >
+            Edit Your Profile
+          </Typography>
+
+          <form>
+            <div className="data-1">
+              <Stack gap={0.5} className="my-info">
+                <label htmlFor="firstName">First Name</label>
+                <input
+                  type="text"
+                  id="firstName"
+                  name="firstName"
+                  placeholder="First Name"
+                />
+              </Stack>
+
+              <Stack gap={0.5} className="my-info">
+                <label htmlFor="lastName">Last Name</label>
+                <input
+                  type="text"
+                  id="lastName"
+                  name="lastName"
+                  placeholder="Last Name"
+                />
+              </Stack>
+
+              <Stack gap={0.5} className="my-info">
+                <label htmlFor="email">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="Email"
+                />
+              </Stack>
+              <Stack gap={0.5} className="my-info">
+                <label htmlFor="address">Address</label>
+                <input
+                  type="text"
+                  id="address"
+                  name="address"
+                  placeholder="Address"
+                />
+              </Stack>
+            </div>
+
+            <Stack className="data-2" gap={2} mt={3}>
+              <label style={{ fontWeight: "500" }} htmlFor="password">
+                Password Changes
+              </label>
+              <input
+                type="password"
+                placeholder="Current Password"
+                id="password"
+              />
+              <input type="password" placeholder="New Password" />
+              <input type="password" placeholder="Confirm New Password" />
+            </Stack>
+
+            <Stack className="account-btns">
+              <Button variant="text">Canel</Button>
+              <Button variant="contained">Save Changes</Button>
+            </Stack>
+          </form>
         </Stack>
       </Stack>
     </section>

@@ -174,3 +174,25 @@ header .controls {
     }
   }
 }
+
+@media (max-width: 350px) {
+  header .controls {
+    gap: 5px;
+
+    & .search {
+      position: relative;
+      width: 155px;
+      height: 38px;
+
+      & input::placeholder {
+        font-size: 10px;
+      }
+
+      & .search-i {
+        right: 0px;
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+}
