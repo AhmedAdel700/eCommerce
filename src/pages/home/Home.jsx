@@ -10,6 +10,8 @@ import { Link } from "react-router-dom";
 
 import "./home.css";
 import { useState } from "react";
+import Benefits from "../../components/Benefits";
+import ScrollToTopButton from "../../components/ScrollToTopButton";
 
 export default function Home() {
   const { redirectState } = useSelector((state) => state.auth);
@@ -138,7 +140,7 @@ export default function Home() {
           </Box>
 
           <Stack
-            className="dots"
+            className="dots landing"
             direction={"row"}
             justifyContent={"center"}
             gap={2}
@@ -152,6 +154,9 @@ export default function Home() {
           </Stack>
         </div>
       </section>
+
+      <Benefits />
+      <ScrollToTopButton />
     </main>
   );
 }

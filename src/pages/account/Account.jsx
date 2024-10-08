@@ -2,6 +2,7 @@ import { Box, Button, Stack, Typography } from "@mui/material";
 
 import { Link, redirect } from "react-router-dom";
 import "./account.css";
+import ScrollToTopButton from "../../components/ScrollToTopButton";
 
 export function loader(isAuthenticated) {
   if (!isAuthenticated) {
@@ -161,6 +162,8 @@ export default function Account() {
           </form>
         </Stack>
       </Stack>
+
+      <ScrollToTopButton />
     </section>
   );
 }

@@ -79,14 +79,14 @@
   margin-top: 1rem;
 }
 
-.dots {
+.dots.landing {
   position: absolute;
   bottom: 1rem;
   left: 50%;
   transform: translateX(-50%);
 }
 
-.dots > :nth-child(3) {
+.dots.landing > :nth-child(3) {
   position: relative;
   background-color: white !important;
   border: 2px solid white !important;
@@ -119,6 +119,7 @@
     transform: translateX(-250px);
     transition: 0.5s;
     width: 0;
+    margin-left: -1.6rem;
   }
 
   .landing-left-side.open {
@@ -130,8 +131,9 @@
 
   .open-menu-home {
     position: absolute;
-    left: 265px;
+    left: 270px;
     top: 10px;
+    margin-left: 1rem;
     cursor: pointer;
     font-size: 1.8rem !important;
   }
@@ -173,7 +175,7 @@
 
 @media (max-width: 767px) {
   .landing-right-side {
-    padding: 1rem;
+    padding: 2rem;
   }
 
   .landing-right-side .iphone-img {
@@ -187,6 +189,10 @@
     & img {
       max-width: 100%;
     }
+  }
+
+  .open-menu-home {
+    left: 260px;
   }
 }
 

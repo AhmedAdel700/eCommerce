@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 
 import "./contact.css";
+import ScrollToTopButton from "../../components/ScrollToTopButton";
 
 export default function Contact() {
   const [data, setData] = useState({
@@ -148,6 +149,7 @@ export default function Contact() {
           </form>
         </Box>
       </Box>
+      <ScrollToTopButton />
     </section>
   );
 }
