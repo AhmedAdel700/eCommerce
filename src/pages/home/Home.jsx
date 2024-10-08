@@ -5,17 +5,25 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import AppleIcon from "@mui/icons-material/Apple";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { addProducts } from "../../store/productSlice";
 import { Link } from "react-router-dom";
 
-import "./home.css";
 import { useState } from "react";
 import Benefits from "../../components/Benefits";
 import ScrollToTopButton from "../../components/ScrollToTopButton";
+import "./home.css";
 
 export default function Home() {
   const { redirectState } = useSelector((state) => state.auth);
+  const { products } = useSelector((state) => state.products);
   const smallScreens = useMediaQuery("(max-width:1150px)");
+
+  const dispatch = useDispatch();
+
+  useState(() => {
+    dispatch(addProducts());
+  }, [dispatch]);
 
   const [open, setOpen] = useState(false);
 
@@ -67,6 +75,33 @@ export default function Home() {
           {link.name} {link.icon}
         </Box>
       </Link>
+    );
+  });
+
+  // Get A Single Product
+  const singleProduct = () => {
+    return (
+      <div key={products?.product?.id}>
+        <img src={products?.product?.image} />
+      </div>
+    );
+  };
+
+  const renderedProducts = products?.products?.map((product) => {
+    return (
+      <div key={product.id} className="product">
+        <div style={{ width: "200px", display: "flex" }}>
+          <img
+            style={{ maxWidth: "100%" }}
+            src={product.image}
+            alt={product.name}
+            loading="lazy"
+          />
+        </div>
+        <h2>{product.name}</h2>
+        <p>${product.price}</p>
+        <Link to={`/product/${product.id}`}>View Product</Link>
+      </div>
     );
   });
 
@@ -153,6 +188,20 @@ export default function Home() {
             <div></div>
           </Stack>
         </div>
+      </section>
+
+      <section
+        className="products"
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: "1rem",
+        }}
+      >
+        {renderedProducts}
+        {singleProduct()}
       </section>
 
       <Benefits />
