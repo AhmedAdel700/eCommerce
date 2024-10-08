@@ -12,10 +12,19 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import CartLogo from "../CartLogo";
 import { Stack } from "@mui/material";
 
+import LogoutIcon from "@mui/icons-material/Logout";
+import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+import StarBorderRoundedIcon from "@mui/icons-material/StarBorderRounded";
+import LocalMallOutlinedIcon from "@mui/icons-material/LocalMallOutlined";
+
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../../store/authSlice";
+
 import "./header.css";
+
+//Language Menu Styles
 
 const StyledMenu = styled((props) => (
   <Menu
@@ -60,12 +69,59 @@ const StyledMenu = styled((props) => (
   },
 }));
 
+// Menu Account Styles
+
+const StyledMenuForAccount = styled((props) => (
+  <Menu
+    elevation={0}
+    anchorOrigin={{
+      vertical: "bottom",
+      horizontal: "right",
+    }}
+    transformOrigin={{
+      vertical: "top",
+      horizontal: "right",
+    }}
+    {...props}
+  />
+))(({ theme }) => ({
+  "& .MuiPaper-root": {
+    borderRadius: 4,
+    marginTop: theme.spacing(1),
+    minWidth: 180,
+    color: "#F5f5f5",
+    boxShadow:
+      "rgb(255, 255, 255) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px",
+    "& .MuiMenu-list": {
+      padding: "4px 0",
+    },
+    "& .MuiMenuItem-root": {
+      "& .MuiSvgIcon-root": {
+        fontSize: 30,
+        color: "white",
+        marginRight: theme.spacing(1.5),
+        Zindex: "100",
+      },
+      "&:active": {
+        backgroundColor: alpha(
+          theme.palette.primary.main,
+          theme.palette.action.selectedOpacity
+        ),
+      },
+    },
+    ...theme.applyStyles("dark", {
+      color: theme.palette.grey[300],
+    }),
+  },
+}));
+
 export default function Header() {
   const meduimScreens = useMediaQuery("(min-width:991px)");
   const smallScreens = useMediaQuery("(max-width:768px)");
 
   let location = useLocation();
 
+  const dispatch = useDispatch();
   const { isAuthenticated } = useSelector((state) => state.auth);
 
   const [active, setActive] = useState(false);
@@ -79,8 +135,17 @@ export default function Header() {
     setAnchorEl(event.currentTarget);
   };
 
+  const handleClickForAccount = (event) => {
+    setToggleMenu(event.currentTarget);
+  };
+
   const handleClose = () => {
     setAnchorEl(null);
+    setToggleMenu(null);
+  };
+
+  const handleCloseForAccount = () => {
+    setToggleMenu(null);
   };
 
   const handleSelect = (event) => {
@@ -138,6 +203,57 @@ export default function Header() {
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
+
+  const [toggleMenu, setToggleMenu] = useState(null);
+  const openAccount = Boolean(toggleMenu);
+
+  const menuItems = [
+    {
+      icon: <PersonOutlineOutlinedIcon />,
+      label: "Manage My Account",
+      link: "account",
+    },
+    {
+      icon: <LocalMallOutlinedIcon />,
+      label: "My Order",
+      link: ".",
+    },
+    {
+      icon: <HighlightOffIcon />,
+      label: "My Cancellations",
+      link: ".",
+    },
+    {
+      icon: <StarBorderRoundedIcon />,
+      label: "My Reviews",
+      link: ".",
+    },
+    {
+      icon: <LogoutIcon sx={{ transform: "scaleX(-1)" }} />,
+      label: "Logout",
+      link: "/sign-up",
+    },
+  ];
+
+  const renderMenuItems = () => {
+    return menuItems.map((item, index) => (
+      <Link to={item.link} key={index}>
+        <MenuItem
+          className="account-icons"
+          onClick={() => {
+            handleCloseForAccount();
+            if (item.label === "Logout") {
+              dispatch(logout());
+            }
+          }}
+          disableRipple
+        >
+          {item.icon}
+          {item.label}
+        </MenuItem>
+      </Link>
+    ));
+  };
 
   return (
     <header>
@@ -216,21 +332,42 @@ export default function Header() {
           <CartLogo />
 
           {isAuthenticated && (
-            <Link to="account">
-              <PersonOutlineOutlinedIcon
-                sx={{
-                  backgroundColor: "var(--red-color)",
-                  color: "white",
-                  borderRadius: "50%",
-                  width: "30px",
-                  height: "30px",
-                  padding: "5px",
-                  cursor: "pointer",
-                  marginTop: "4px",
-                }}
-              />
-            </Link>
+            <PersonOutlineOutlinedIcon
+              tabIndex={0}
+              sx={{
+                backgroundColor: "var(--red-color)",
+                color: "white",
+                borderRadius: "50%",
+                width: "30px",
+                height: "30px",
+                padding: "5px",
+                cursor: "pointer",
+                marginTop: "4px",
+              }}
+              id="demo-customized-button"
+              aria-controls={openAccount ? "demo-customized-menu" : undefined}
+              aria-haspopup="true"
+              aria-expanded={openAccount ? "true" : undefined}
+              variant="contained"
+              disableElevation
+              onClick={handleClickForAccount}
+            />
           )}
+
+          {/* The Account Menu */}
+          <div>
+            <StyledMenuForAccount
+              id="demo-customized-menu"
+              MenuListProps={{
+                "aria-labelledby": "demo-customized-button",
+              }}
+              anchorEl={toggleMenu}
+              open={openAccount}
+              onClose={handleCloseForAccount}
+            >
+              {renderMenuItems()}
+            </StyledMenuForAccount>
+          </div>
         </Box>
       </Stack>
     </header>

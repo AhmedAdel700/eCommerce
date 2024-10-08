@@ -21,10 +21,13 @@ const authSlice = createSlice({
         changeDirection: (state, action) => {
             state.redirectState.state = action.payload.state;
             state.redirectState.type = action.payload.type;
+        },
+        logout: (state) => {
+            state.isAuthenticated = false;
         }
     }
 })
 
-export const { isLoggedIn, changeDirection } = authSlice.actions;
+export const { isLoggedIn, changeDirection, logout } = authSlice.actions;
 
 export default authSlice.reducer;

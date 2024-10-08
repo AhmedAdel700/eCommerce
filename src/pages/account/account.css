@@ -139,6 +139,16 @@
   .header-info {
     font-size: 12px;
   }
+
+  .account form .account-btns button:first-child {
+    font-size: 1rem;
+    font-weight: 600;
+    width: fit-content;
+  }
+
+  .account form .account-btns button:last-child {
+    width: 175px;
+  }
 }
 
 @media (max-width: 350px) {

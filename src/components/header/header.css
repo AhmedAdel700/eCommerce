@@ -47,7 +47,7 @@ header .summer-sale .lang {
 
 header .nav-icons {
   padding: 40px var(--main-padding) 14px;
-  border-bottom: 2px solid #f5f5f5;
+  border-bottom: 1px solid #0000001e;
 }
 
 header .exclusive {
@@ -108,6 +108,17 @@ header .controls {
   }
 }
 
+.MuiMenu-list {
+  background-image: linear-gradient(
+    to top right,
+    rgba(128, 0, 128, 0.486),
+    /* Lighter purple with transparency */ rgba(128, 0, 128, 0.459),
+    /* Darker purple with more opacity */ #00000094,
+    /* Semi-transparent black */ #000000a9,
+    /* More opaque black */ #6b6868 /* Light grayish color for a soft end */
+  );
+}
+
 @media (max-width: 1024px) {
   .palce-holder {
     display: none;
@@ -144,8 +155,8 @@ header .controls {
     position: absolute;
     left: 0;
     top: 100%;
-    background-color: var(--dark-color);
-    color: var(--text-color);
+    background-color: var(--red-color);
+    color: var(--dark-color);
     width: 100%;
     height: fit-content;
     z-index: 100;

@@ -11,7 +11,7 @@ import "./signUp.css";
 export default function SginUp() {
   const dispatch = useDispatch();
 
-  let { redirectState } = useSelector((state) => state.auth);
+  let { redirectState, isAuthenticated } = useSelector((state) => state.auth);
 
   const navigate = useNavigate();
 
@@ -161,18 +161,22 @@ export default function SginUp() {
 
           {!login && (
             <Stack direction={"row"} gap={3} justifyContent={"center"}>
-              <p>Already have account?</p>
+              {!isAuthenticated && <p>Already have account?</p>}
 
               <Typography
                 variant="button"
-                onClick={() => setLogin(true)}
+                onClick={() => {
+                  if (!isAuthenticated) {
+                    setLogin(true);
+                  }
+                }}
                 sx={{
                   textDecoration: "underline",
                   cursor: "pointer",
                   textTransform: "capitalize",
                 }}
               >
-                Log in
+                {isAuthenticated ? "You Are Already Logged in" : "Log in"}
               </Typography>
             </Stack>
           )}

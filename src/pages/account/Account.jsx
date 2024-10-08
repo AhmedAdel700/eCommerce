@@ -155,7 +155,7 @@ export default function Account() {
             </Stack>
 
             <Stack className="account-btns">
-              <Button variant="text">Canel</Button>
+              <Button variant="text">Cancel</Button>
               <Button variant="contained">Save Changes</Button>
             </Stack>
           </form>

@@ -35,3 +35,30 @@ ul {
 .cart-text {
   color: var(--red-color);
 }
+
+.dots > * {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: var(--text-color);
+  cursor: pointer;
+  margin-top: 3.5rem;
+  border: 2px solid var(--text-color);
+}
+
+.dots > :nth-child(3) {
+  background-color: transparent;
+  position: relative;
+}
+
+.dots > :nth-child(3)::after {
+  position: absolute;
+  content: "";
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  background-color: var(--red-color);
+  border-radius: 50%;
+}
