@@ -6,7 +6,7 @@ export const addProducts = createAsyncThunk("products/addProducts", async (produ
     const { rejectWithValue } = thunkAPI
 
     try {
-        const response = await fetch(productId ? `https://fakestoreapi.in/api/products/${productId}` : "https://fakestoreapi.in/api/products?limit=150");
+        const response = await fetch(productId ? `https://fakestoreapi.in/api/products/${productId}` : "https://fakestoreapi.in/api/products?limit=20");
         const data = await response.json();
         return data;
     } catch (error) {

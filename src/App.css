@@ -5,7 +5,7 @@
   --dark-color: #000;
   --red-color: #db4444;
   --text-color: #828282;
-  --text-2-color:#00000083;
+  --text-2-color: #00000083;
 }
 
 * {
@@ -26,6 +26,14 @@ a {
 
 ul {
   list-style: none;
+}
+
+.loading,
+.error {
+  text-align: center;
+  font-size: 2rem;
+  margin: 1rem auto;
+  color: var(--red-color);
 }
 
 .icon {
@@ -61,4 +69,35 @@ ul {
   height: 8px;
   background-color: var(--red-color);
   border-radius: 50%;
+}
+
+.line {
+  width: 85%;
+  height: 1px;
+  background-color: #0000001e;
+  margin: 0rem auto;
+  border: none;
+}
+
+.products {
+  padding: 1rem 0 1rem var(--main-padding);
+  margin-bottom: 3rem;
+}
+
+.slider-container {
+  width: 100%;
+  height: fit-content;
+  position: relative;
+}
+
+.product-img {
+  width: 85%;
+  position: relative;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  overflow: hidden;
+}
+
+.slick-prev i,
+.slick-next i {
+  display: none !important;
 }

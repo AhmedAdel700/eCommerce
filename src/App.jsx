@@ -11,11 +11,11 @@ import Home from "./pages/home/Home";
 import SignUp from "./pages/sign-up/SignUp";
 import About from "./pages/about/About";
 import Contact from "./pages/contact/Contact";
+import Account, { loader as accountLoader } from "./pages/account/Account";
+import NotFound from "./pages/not-found/NotFound";
 
 // Css Main Style Sheet
 import "./App.css";
-import NotFound from "./pages/not-found/NotFound";
-import Account, { loader as accountLoader } from "./pages/account/Account";
 
 import { useSelector } from "react-redux";
 

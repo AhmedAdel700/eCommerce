@@ -1,4 +1,4 @@
-import { Alert, Box, Stack } from "@mui/material";
+import { Alert, Box, Button, Stack } from "@mui/material";
 import KeyboardArrowRightOutlinedIcon from "@mui/icons-material/KeyboardArrowRightOutlined";
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -9,19 +9,20 @@ import { useSelector, useDispatch } from "react-redux";
 import { addProducts } from "../../store/productSlice";
 import { Link } from "react-router-dom";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Benefits from "../../components/Benefits";
 import ScrollToTopButton from "../../components/ScrollToTopButton";
 import "./home.css";
+import SliderComp from "../../components/SliderComp";
 
 export default function Home() {
   const { redirectState } = useSelector((state) => state.auth);
-  const { products } = useSelector((state) => state.products);
+  const { products, loading, error } = useSelector((state) => state.products);
   const smallScreens = useMediaQuery("(max-width:1150px)");
 
   const dispatch = useDispatch();
 
-  useState(() => {
+  useEffect(() => {
     dispatch(addProducts());
   }, [dispatch]);
 
@@ -79,31 +80,13 @@ export default function Home() {
   });
 
   // Get A Single Product
-  const singleProduct = () => {
-    return (
-      <div key={products?.product?.id}>
-        <img src={products?.product?.image} />
-      </div>
-    );
-  };
-
-  const renderedProducts = products?.products?.map((product) => {
-    return (
-      <div key={product.id} className="product">
-        <div style={{ width: "200px", display: "flex" }}>
-          <img
-            style={{ maxWidth: "100%" }}
-            src={product.image}
-            alt={product.name}
-            loading="lazy"
-          />
-        </div>
-        <h2>{product.name}</h2>
-        <p>${product.price}</p>
-        <Link to={`/product/${product.id}`}>View Product</Link>
-      </div>
-    );
-  });
+  // const singleProduct = () => {
+  //   return (
+  //     <div key={products?.product?.id}>
+  //       <img src={products?.product?.image} />
+  //     </div>
+  //   );
+  // };
 
   return (
     <main>
@@ -190,19 +173,88 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Start Of Products Sales Section */}
       <section
         className="products"
         style={{
+          maxWidth: "100%",
+          position: "relative",
+          overflow: "hidden",
           display: "flex",
-          flexWrap: "wrap",
-          justifyContent: "center",
-          alignItems: "center",
-          gap: "1rem",
+          flexDirection: "column",
+          gap: "2rem",
         }}
       >
-        {renderedProducts}
-        {singleProduct()}
+        <Stack gap={2} direction={"row"} alignItems={"center"}>
+          <div className="red"></div>
+          <h4 style={{ color: "var(--red-color)", fontWeight: "600" }}>
+            Today’s
+          </h4>
+        </Stack>
+
+        <Stack
+          gap={6}
+          direction={"row"}
+          alignItems={"center"}
+          flexWrap={"wrap"}
+        >
+          <h2>Flash Sales</h2>
+
+          <Stack className="date">
+            <Stack
+              direction={"row"}
+              justifyContent={"space-between"}
+              className="days"
+              gap={3}
+            >
+              <span>Days</span>
+              <span>Hours</span>
+              <span>Minutes</span>
+              <span>Seconds</span>
+            </Stack>
+            <Stack
+              className="days"
+              direction={"row"}
+              justifyContent={"space-between"}
+              gap={3}
+            >
+              <span>03</span>
+              <span>:</span>
+              <span>23</span>
+              <span>:</span>
+              <span>19</span>
+              <span>:</span>
+              <span>56</span>
+            </Stack>
+          </Stack>
+        </Stack>
+
+        {/* Render The Slider Data => The Products*/}
+        {loading ? (
+          <h2 className="loading">Loading ...</h2>
+        ) : error ? ( // Check for error
+          <h2 className="error">An error occurred: {error}</h2> // Display error message
+        ) : (
+          <SliderComp products={products} btn={true} />
+        )}
+
+        <Link to={"about"} style={{ margin: "0 auto" }}>
+          <Button
+            variant="contained"
+            sx={{
+              backgroundColor: "var(--red-color)",
+              textTransform: "capitalize",
+              width: "234px",
+              height: "56px",
+              fontSize: "1rem",
+            }}
+          >
+            View All Products
+          </Button>
+        </Link>
       </section>
+
+      <hr className="line" />
 
       <Benefits />
       <ScrollToTopButton />
