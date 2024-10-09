@@ -20,7 +20,13 @@ function SamplePrevArrow(props) {
   return <div className={className} onClick={onClick} />;
 }
 
-export default function SliderComp({ products, btn, slider, categories }) {
+export default function SliderComp({
+  products,
+  btn,
+  slider,
+  categories,
+  sliderProduct,
+}) {
   const [likes, setLikes] = useState({}); // Store the like state for each product
 
   let settings = {
@@ -66,9 +72,7 @@ export default function SliderComp({ products, btn, slider, categories }) {
     }));
   };
 
-  const data = products?.products;
-
-  const renderedProducts = data?.map((product) => {
+  const renderedProducts = products?.products?.map((product) => {
     return (
       <div key={product.id} className="product">
         <div className="product-img">

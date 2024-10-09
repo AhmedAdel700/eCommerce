@@ -29,6 +29,7 @@ export default function Home() {
   const { products, loading, error } = useSelector((state) => state.products);
   const smallScreens = useMediaQuery("(max-width:1150px)");
   const slider = useRef(null);
+  const sliderProduct = useRef(null);
 
   const dispatch = useDispatch();
 
@@ -267,10 +268,16 @@ export default function Home() {
           </Stack>
 
           <Stack direction={"row"} gap={3} className="slider-btns">
-            <Box onClick={() => slider.current.slickPrev()} className="prev">
+            <Box
+              onClick={() => sliderProduct.current.slickPrev()}
+              className="prev"
+            >
               <WestIcon />
             </Box>
-            <Box onClick={() => slider.current.slickNext()} className="next">
+            <Box
+              onClick={() => sliderProduct.current.slickNext()}
+              className="next"
+            >
               <EastIcon />
             </Box>
           </Stack>
@@ -282,7 +289,7 @@ export default function Home() {
         ) : error ? ( // Check for error
           <h2 className="error">An error occurred: {error}</h2> // Display error message
         ) : (
-          <SliderComp products={products} btn={true} slider={slider} />
+          <SliderComp products={products} btn={true} slider={sliderProduct} />
         )}
 
         <Link to={"about"} style={{ margin: "0 auto" }}>
