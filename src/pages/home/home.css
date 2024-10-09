@@ -92,6 +92,49 @@
   border: 2px solid white !important;
 }
 
+.header-section {
+  padding: 0 136px 0 0;
+  margin: 1rem 0;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.date-text {
+  flex-wrap: wrap;
+  gap: 7.5rem;
+  align-items: center;
+}
+
+.sale,
+.cate {
+  font-size: 36px;
+  font-weight: 600;
+}
+
+.date-item {
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+  font-weight: 600;
+
+  & span {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+}
+
+.date-col {
+  color: #e07575;
+  font-size: 38px;
+}
+
+.days {
+  gap: 2rem;
+}
+
 .red {
   background-color: var(--red-color);
   height: 40px;
@@ -155,17 +198,62 @@
   }
 }
 
-@media (max-width: 1250px) {
-  .products {
-    padding: 1rem 0 1rem 1rem !important;
+.featured {
+  padding: 1rem var(--main-padding);
+}
+
+.featured .arrival {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.featured .arrival img {
+  max-width: 100%;
+}
+
+.featured .arrival-left-side,
+.women-collections,
+.perfume,
+.speakers {
+  position: relative;
+}
+
+.featured .arrival-right-side {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.speakers-perfume {
+  gap: 2rem;
+}
+
+.featured .arrival .text-arrival {
+  position: absolute;
+  bottom: 2.2rem;
+  left: 2rem;
+  color: white;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  & h3 {
+    font-size: 24px;
   }
 
-  .slider-container {
-    padding: 5rem 0 1rem 0;
+  & p {
+    font-size: 14px;
+    font-weight: 300;
   }
 
-  .product-img {
-    width: 98%;
+  & span {
+    cursor: pointer;
   }
 }
 
@@ -179,6 +267,51 @@
     & h1 {
       font-size: 35px;
       letter-spacing: 2px;
+    }
+  }
+}
+
+@media (max-width: 1250px) {
+  .products {
+    padding: 1rem 0 1rem 1rem !important;
+  }
+
+  .header-section {
+    padding: 0 1rem 0 0;
+    margin: 1rem 0;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .slider-container {
+    padding: 5rem 0 1rem 0;
+  }
+
+  .product-img {
+    width: 98%;
+  }
+
+  .date-text {
+    gap: 1rem;
+  }
+
+  .featured {
+    padding: 0 1rem !important;
+  }
+
+  .featured .arrival {
+    margin-top: 0rem;
+  }
+
+  .featured .arrival .text-arrival {
+    bottom: 2rem;
+    left: 1rem;
+    height: fit-content;
+
+    & h3 {
+      font-size: 20px;
     }
   }
 }
@@ -272,6 +405,50 @@
   .open-menu-home {
     left: 260px;
   }
+
+  .header-section {
+    margin: 0 0 1rem;
+    justify-content: center;
+    gap: 0.7rem;
+  }
+
+  .date-text {
+    justify-content: center;
+  }
+
+  .date-item {
+    flex-direction: column;
+    align-items: center;
+
+    & span {
+      font-size: 24px;
+    }
+  }
+
+  .date-col {
+    font-size: 24px;
+  }
+
+  .days {
+    gap: 1rem;
+  }
+
+  .cate {
+    font-size: 2rem;
+  }
+
+  .featured .arrival {
+    gap: 0.8rem;
+    flex-direction: column;
+  }
+
+  .featured .arrival-right-side {
+    gap: 0.8rem;
+  }
+
+  .speakers-perfume {
+    gap: 1.2rem;
+  }
 }
 
 @media (max-width: 350px) {
@@ -281,5 +458,9 @@
 
   .open-menu-home {
     left: 260px;
+  }
+
+  .cate {
+    font-size: 1.8rem;
   }
 }

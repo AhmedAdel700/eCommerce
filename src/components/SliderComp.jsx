@@ -1,52 +1,34 @@
 import { Link } from "react-router-dom";
+import { Box, Button } from "@mui/material";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
+import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 
 // React Slick Css Files
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-
-// import EastIcon from "@mui/icons-material/East";
-// import { Button } from "@mui/material";
+import { useState } from "react";
 
 function SampleNextArrow(props) {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={className}
-      style={{
-        ...style,
-        background: "#000", // Set background color
-        top: "-20%",
-        right: "15%",
-      }}
-      onClick={onClick}
-    ></div>
-  );
-}
-function SamplePrevArrow(props) {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={className}
-      style={{
-        ...style,
-        display: "block",
-        background: "green",
-        top: "-20%",
-        left: "80%",
-        color: "#000",
-      }}
-      onClick={onClick}
-    />
-  );
+  const { className, onClick } = props;
+  return <div className={className} onClick={onClick}></div>;
 }
 
-export default function SliderComp({ products, btn }) {
+function SamplePrevArrow(props) {
+  const { className, onClick } = props;
+  return <div className={className} onClick={onClick} />;
+}
+
+export default function SliderComp({ products, btn, slider, categories }) {
+  const [likes, setLikes] = useState({}); // Store the like state for each product
+
   let settings = {
     dots: false,
-    infinite: false,
-    slidesToShow: 5.5,
-    slidesToScroll: 5,
+    infinite: categories ? true : false,
+    slidesToShow: categories ? 6 : 5.5,
+    slidesToScroll: categories ? 6 : 5,
+    arrows: false,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
     responsive: [
@@ -70,14 +52,23 @@ export default function SliderComp({ products, btn }) {
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 1.5,
+          slidesToShow: categories ? 1 : 1.5,
           slidesToScroll: 1,
         },
       },
     ],
   };
 
-  const renderedProducts = products?.products?.map((product) => {
+  const handleLikeClick = (productId) => {
+    setLikes((prevLikes) => ({
+      ...prevLikes,
+      [productId]: !prevLikes[productId], // Toggle like state for the clicked product
+    }));
+  };
+
+  const data = products?.products;
+
+  const renderedProducts = data?.map((product) => {
     return (
       <div key={product.id} className="product">
         <div className="product-img">
@@ -89,22 +80,39 @@ export default function SliderComp({ products, btn }) {
             )}
           </div>
 
+          <div className="like">
+            <Box
+              tabIndex={0}
+              onClick={() => handleLikeClick(product.id)} // Call function on click
+            >
+              {likes[product.id] ? (
+                <FavoriteOutlinedIcon />
+              ) : (
+                <FavoriteBorderIcon />
+              )}
+            </Box>
+            <Link to={`/products/${product.id}`}>
+              <Box>
+                <RemoveRedEyeOutlinedIcon />
+              </Box>
+            </Link>
+          </div>
+
           {btn && (
             <div className="add-to-cart">
-              <Link
-                to={`/products/${product.id}`}
-                style={{
+              <Button
+                sx={{
                   width: "100%",
                   color: "white",
                   textTransform: "capitalize",
                   fontWeight: "500",
                   fontSize: "1rem",
-                  lineHeight: "2.4",
+                  lineHeight: "1.5",
                   textAlign: "center",
                 }}
               >
                 Add To Cart
-              </Link>
+              </Button>
             </div>
           )}
 
@@ -128,9 +136,23 @@ export default function SliderComp({ products, btn }) {
     );
   });
 
+  const renderedCategories = categories?.map((category) => {
+    return (
+      <Link to={`/category/${category.id}`} key={category.id}>
+        <div className="category">
+          {category.icon}
+          <p>{category.name}</p>
+        </div>
+      </Link>
+    );
+  });
+
   return (
     <div className="slider-container">
-      <Slider {...settings}>{renderedProducts}</Slider>
+      <Slider ref={slider} {...settings}>
+        {renderedProducts}
+        {renderedCategories}
+      </Slider>
     </div>
   );
 }

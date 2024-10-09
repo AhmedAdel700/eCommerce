@@ -5,20 +5,30 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import AppleIcon from "@mui/icons-material/Apple";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
+import DesktopMacOutlinedIcon from "@mui/icons-material/DesktopMacOutlined";
+import VideogameAssetOutlinedIcon from "@mui/icons-material/VideogameAssetOutlined";
+import PhoneAndroidOutlinedIcon from "@mui/icons-material/PhoneAndroidOutlined";
+import WatchOutlinedIcon from "@mui/icons-material/WatchOutlined";
+import CameraAltOutlinedIcon from "@mui/icons-material/CameraAltOutlined";
+import HeadsetOutlinedIcon from "@mui/icons-material/HeadsetOutlined";
+import EastIcon from "@mui/icons-material/East";
+import WestIcon from "@mui/icons-material/West";
+
 import { useSelector, useDispatch } from "react-redux";
 import { addProducts } from "../../store/productSlice";
 import { Link } from "react-router-dom";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Benefits from "../../components/Benefits";
 import ScrollToTopButton from "../../components/ScrollToTopButton";
-import "./home.css";
 import SliderComp from "../../components/SliderComp";
+import "./home.css";
 
 export default function Home() {
   const { redirectState } = useSelector((state) => state.auth);
   const { products, loading, error } = useSelector((state) => state.products);
   const smallScreens = useMediaQuery("(max-width:1150px)");
+  const slider = useRef(null);
 
   const dispatch = useDispatch();
 
@@ -87,6 +97,39 @@ export default function Home() {
   //     </div>
   //   );
   // };
+
+  const categories = [
+    {
+      id: 1,
+      name: "Phones",
+      icon: <PhoneAndroidOutlinedIcon />,
+    },
+    {
+      id: 2,
+      name: "Computers",
+      icon: <DesktopMacOutlinedIcon />,
+    },
+    {
+      id: 3,
+      name: "SmartWatch",
+      icon: <WatchOutlinedIcon />,
+    },
+    {
+      id: 4,
+      name: "Camera",
+      icon: <CameraAltOutlinedIcon />,
+    },
+    {
+      id: 5,
+      name: "HeadPhones",
+      icon: <HeadsetOutlinedIcon />,
+    },
+    {
+      id: 6,
+      name: "Gaming",
+      icon: <VideogameAssetOutlinedIcon />,
+    },
+  ];
 
   return (
     <main>
@@ -182,7 +225,7 @@ export default function Home() {
           overflow: "hidden",
           display: "flex",
           flexDirection: "column",
-          gap: "2rem",
+          gap: "0.5rem",
         }}
       >
         <Stack gap={2} direction={"row"} alignItems={"center"}>
@@ -192,40 +235,44 @@ export default function Home() {
           </h4>
         </Stack>
 
-        <Stack
-          gap={6}
-          direction={"row"}
-          alignItems={"center"}
-          flexWrap={"wrap"}
-        >
-          <h2>Flash Sales</h2>
+        <Stack direction={"row"} className="header-section">
+          <Stack className="date-text" direction={"row"}>
+            <h2 className="sale">Flash Sales</h2>
 
-          <Stack className="date">
-            <Stack
-              direction={"row"}
-              justifyContent={"space-between"}
-              className="days"
-              gap={3}
-            >
-              <span>Days</span>
-              <span>Hours</span>
-              <span>Minutes</span>
-              <span>Seconds</span>
+            <Stack className="date">
+              <Stack direction={"row"} alignItems={"center"} className="days">
+                <span className="date-item">
+                  Days <span>03</span>
+                </span>
+
+                <span className="date-col">:</span>
+
+                <span className="date-item">
+                  Hours <span>23</span>
+                </span>
+
+                <span className="date-col">:</span>
+
+                <span className="date-item">
+                  Minutes <span>19</span>
+                </span>
+
+                <span className="date-col">:</span>
+
+                <span className="date-item">
+                  Seconds <span>56</span>
+                </span>
+              </Stack>
             </Stack>
-            <Stack
-              className="days"
-              direction={"row"}
-              justifyContent={"space-between"}
-              gap={3}
-            >
-              <span>03</span>
-              <span>:</span>
-              <span>23</span>
-              <span>:</span>
-              <span>19</span>
-              <span>:</span>
-              <span>56</span>
-            </Stack>
+          </Stack>
+
+          <Stack direction={"row"} gap={3} className="slider-btns">
+            <Box onClick={() => slider.current.slickPrev()} className="prev">
+              <WestIcon />
+            </Box>
+            <Box onClick={() => slider.current.slickNext()} className="next">
+              <EastIcon />
+            </Box>
           </Stack>
         </Stack>
 
@@ -235,7 +282,7 @@ export default function Home() {
         ) : error ? ( // Check for error
           <h2 className="error">An error occurred: {error}</h2> // Display error message
         ) : (
-          <SliderComp products={products} btn={true} />
+          <SliderComp products={products} btn={true} slider={slider} />
         )}
 
         <Link to={"about"} style={{ margin: "0 auto" }}>
@@ -247,6 +294,7 @@ export default function Home() {
               width: "234px",
               height: "56px",
               fontSize: "1rem",
+              marginTop: "2rem",
             }}
           >
             View All Products
@@ -255,6 +303,134 @@ export default function Home() {
       </section>
 
       <hr className="line" />
+
+      {/* Start Of Category Section */}
+      <section
+        className="products"
+        style={{
+          maxWidth: "100%",
+          position: "relative",
+          overflow: "hidden",
+          display: "flex",
+          flexDirection: "column",
+          gap: "0.5rem",
+        }}
+      >
+        <Stack gap={2} direction={"row"} alignItems={"center"}>
+          <div className="red"></div>
+          <h4 style={{ color: "var(--red-color)", fontWeight: "600" }}>
+            Categories
+          </h4>
+        </Stack>
+
+        <Stack direction={"row"} className="header-section">
+          <Stack className="date-text" direction={"row"}>
+            <h2 className="cate">Browse By Category</h2>
+          </Stack>
+
+          <Stack direction={"row"} gap={3} className="slider-btns">
+            <Box onClick={() => slider.current.slickPrev()} className="prev">
+              <WestIcon />
+            </Box>
+            <Box onClick={() => slider.current.slickNext()} className="next">
+              <EastIcon />
+            </Box>
+          </Stack>
+        </Stack>
+
+        {/* Render The Slider Data => The Products*/}
+        {loading ? (
+          <h2 className="loading">Loading ...</h2>
+        ) : error ? ( // Check for error
+          <h2 className="error">An error occurred: {error}</h2> // Display error message
+        ) : (
+          <Box className="category-box">
+            <SliderComp categories={categories} slider={slider} btn={false} />
+          </Box>
+        )}
+      </section>
+
+      <hr className="line" />
+
+      {/* Start Of Featured Section */}
+      <section
+        className="featured"
+        style={{
+          maxWidth: "100%",
+          overflow: "hidden",
+        }}
+      >
+        <Stack gap={2} direction={"row"} alignItems={"center"}>
+          <div className="red"></div>
+          <h4 style={{ color: "var(--red-color)", fontWeight: "600" }}>
+            Featured
+          </h4>
+        </Stack>
+
+        <Stack direction={"row"} className="header-section">
+          <Stack className="date-text" direction={"row"}>
+            <h2 className="cate">New Arrival</h2>
+          </Stack>
+        </Stack>
+
+        <Box className="arrival">
+          <Box className="arrival-left-side">
+            <img src="../images/ps5.png" alt="Play Station 5" />
+
+            <div className="text-arrival" style={{ height: "130px" }}>
+              <h3>PlayStation 5</h3>
+              <p style={{ width: "75%" }}>
+                Black and White version of the PS5 coming out on sale.
+              </p>
+
+              <span tabIndex={0} style={{ textDecoration: "underLine" }}>
+                Shop Now
+              </span>
+            </div>
+          </Box>
+
+          <Box className="arrival-right-side">
+            <Box className="women-collections">
+              <img src="../images/women.png" alt="Women’s Collections" />
+              <div className="text-arrival" style={{ height: "130px" }}>
+                <h3>Women’s Collections</h3>
+                <p style={{ width: "75%" }}>
+                  Featured woman collections that give you another vibe.
+                </p>
+
+                <span tabIndex={0} style={{ textDecoration: "underLine" }}>
+                  Shop Now
+                </span>
+              </div>
+            </Box>
+
+            <Stack direction={"row"} className="speakers-perfume">
+              <Box className="speakers">
+                <img src="../images/speakers.png" alt="Speakers" />
+                <div className="text-arrival">
+                  <h3>Speakers</h3>
+                  <p>Amazon wireless speakers</p>
+
+                  <span tabIndex={0} style={{ textDecoration: "underLine" }}>
+                    Shop Now
+                  </span>
+                </div>
+              </Box>
+              <Box className="perfume">
+                <img src="../images/perfume.png" alt="Perfume" />
+                <div className="text-arrival">
+                  <h3>Perfume</h3>
+                  <p>GUCCI INTENSE OUD EDP</p>
+
+                  <span tabIndex={0} style={{ textDecoration: "underLine" }}>
+                    Shop Now
+                  </span>
+                </div>
+              </Box>
+            </Stack>
+          </Box>
+        </Box>
+      </section>
 
       <Benefits />
       <ScrollToTopButton />
