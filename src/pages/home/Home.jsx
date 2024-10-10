@@ -309,9 +309,7 @@ export default function Home() {
 
         <Stack direction={"row"} className="header-section">
           <Stack className="date-text" direction={"row"}>
-            <h2 className="best-selling">
-              Best Selling Products
-            </h2>
+            <h2 className="best-selling">Best Selling Products</h2>
           </Stack>
 
           <Stack>

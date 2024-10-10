@@ -1,12 +1,13 @@
 import { Box, Button, Stack } from "@mui/material";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import "./wishlist.css";
 
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { addLimitedProducts } from "../../store/productSlice";
+import { removeFromWishlist, toggleLike } from "../../store/wishlistSlice";
 import SliderComp from "../../components/SliderComp";
+import "./wishlist.css";
 
 export default function Wishlist() {
   const { wishlist } = useSelector((state) => state.wishlist);
@@ -26,7 +27,13 @@ export default function Wishlist() {
         <Box className="img-box-list">
           <img src={item.image} alt={item.title} />
 
-          <Box className="delete">
+          <Box
+            className="delete"
+            onClick={() => {
+              dispatch(removeFromWishlist(item.id));
+              dispatch(toggleLike(item.id));
+            }}
+          >
             <DeleteForeverIcon />
           </Box>
 

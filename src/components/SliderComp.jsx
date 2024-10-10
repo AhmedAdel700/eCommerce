@@ -9,7 +9,11 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 
-import { addToWishlist, toggleLike } from "../store/wishlistSlice";
+import {
+  addToWishlist,
+  removeFromWishlist,
+  toggleLike,
+} from "../store/wishlistSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 function SampleNextArrow(props) {
@@ -22,13 +26,20 @@ function SamplePrevArrow(props) {
   return <div className={className} onClick={onClick} />;
 }
 
-export default function SliderComp({ products, btn, slider, categories, section, likeIcon }) {
+export default function SliderComp({
+  products,
+  btn,
+  slider,
+  categories,
+  section,
+  likeIcon,
+}) {
   const dispatch = useDispatch();
   const likes = useSelector((state) => state.wishlist.likes);
 
   let settings = {
     dots: false,
-    infinite: categories ? true : section ? false : false,
+    infinite: categories ? true : false,
     slidesToShow: categories
       ? 6 // If categories are present, show 6 slides
       : section
@@ -48,7 +59,7 @@ export default function SliderComp({ products, btn, slider, categories, section,
         settings: {
           slidesToShow: 3,
           slidesToScroll: 3,
-          infinite: false,
+          infinite: true,
           dots: false,
         },
       },
@@ -58,17 +69,15 @@ export default function SliderComp({ products, btn, slider, categories, section,
           slidesToShow: 2,
           slidesToScroll: 2,
           initialSlide: 2,
+          infinite: true,
         },
       },
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: categories
-            ? 1 // If categories are present
-            : section
-            ? 1.5 // If sections are present (but no categories)
-            : 1.5,
-          slidesToScroll: 1,
+          slidesToShow: categories ? 1 : 2,
+          slidesToScroll: categories ? 1 : 2,
+          infinite: true,
         },
       },
     ],
@@ -78,6 +87,10 @@ export default function SliderComp({ products, btn, slider, categories, section,
     dispatch(toggleLike(product.id));
 
     dispatch(addToWishlist(product));
+
+    if (likes[product.id]) {
+      dispatch(removeFromWishlist(product.id));
+    }
   };
 
   const renderedProducts = products?.products?.map((product) => {

@@ -21,9 +21,14 @@ const wishlistSlice = createSlice({
             } else {
                 state.likes[productId] = true; // Add like if it doesn't exist
             }
+        },
+        // Remove Item From List
+        removeFromWishlist: (state, action) => {
+            const productId = action.payload;
+            state.wishlist = state.wishlist.filter(item => item.id !== productId);
         }
     }
 });
 
-export const { addToWishlist, toggleLike } = wishlistSlice.actions;
+export const { addToWishlist, toggleLike, removeFromWishlist } = wishlistSlice.actions;
 export default wishlistSlice.reducer;

@@ -611,8 +611,23 @@
   }
 
   .music-left-side {
+    padding: 0 1rem;
     & h2 {
-      font-size: 28px;
+      font-size: 25px;
+      width: 100%;
+    }
+
+    & .time-left {
+      gap: 0.6rem;
+
+      & .time-box {
+        width: 55px;
+        height: 55px;
+
+        & span:last-child {
+          font-size: 10px;
+        }
+      }
     }
   }
 
@@ -624,7 +639,6 @@
     & img {
       max-width: 90%;
     }
-
   }
 }
 
@@ -647,25 +661,5 @@
 
   .music {
     padding: 1rem;
-  }
-
-  .music-left-side {
-    & h2 {
-      font-size: 25px;
-      width: 100%;
-    }
-
-    & .time-left {
-      gap: 0.6rem;
-
-      & .time-box {
-        width: 55px;
-        height: 55px;
-
-        & span:last-child {
-          font-size: 10px;
-        }
-      }
-    }
   }
 }
