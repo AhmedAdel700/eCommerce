@@ -158,6 +158,7 @@ export default function Header() {
   const languageList = languages.map((lang) => {
     return (
       <MenuItem
+        className="lang-list"
         key={lang}
         onClick={(() => handleClose, handleSelect)}
         disableRipple
@@ -327,7 +328,9 @@ export default function Header() {
             <SearchIcon className="search-i" />
           </Box>
 
-          <FavoriteBorderOutlinedIcon sx={{ cursor: "pointer" }} />
+          <Link to="wish-list" style={{ paddingTop: "5px" }}>
+            <FavoriteBorderOutlinedIcon sx={{ cursor: "pointer" }} />
+          </Link>
 
           <CartLogo />
 
@@ -342,7 +345,7 @@ export default function Header() {
                 height: "30px",
                 padding: "5px",
                 cursor: "pointer",
-                marginTop: "4px",
+                marginTop: "-4px",
               }}
               id="demo-customized-button"
               aria-controls={openAccount ? "demo-customized-menu" : undefined}

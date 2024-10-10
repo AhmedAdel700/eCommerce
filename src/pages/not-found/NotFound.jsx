@@ -25,7 +25,10 @@ export default function NotFound() {
       </Stack>
 
       <Typography variant="h1">404 Not Found</Typography>
-      <Typography variant="body2" sx={{ lineHeight: "2.4", marginTop: "1rem" }}>
+      <Typography
+        variant="body2"
+        sx={{ lineHeight: "2.4", marginTop: "1rem", fontSize: "0.8rem" }}
+      >
         Your visited page not found. You may go home page.
       </Typography>
 

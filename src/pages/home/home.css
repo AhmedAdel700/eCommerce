@@ -257,6 +257,81 @@
   }
 }
 
+.music {
+  margin: 3rem var(--main-padding);
+  padding: 4rem 6rem;
+  background-color: var(--dark-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.music-left-side {
+  position: relative;
+  z-index: 3;
+  color: white;
+  & h2 {
+    font-size: 48px;
+    font-weight: 600;
+    letter-spacing: 1.4px;
+    width: 55%;
+  }
+  & h4 {
+    font-weight: 500;
+  }
+
+  & .time-left {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    color: #000;
+
+    & .time-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background-color: #fff;
+
+      & span:first-child {
+        font-weight: 700;
+      }
+
+      & span:last-child {
+        font-size: 14px;
+        margin-top: -5px;
+      }
+    }
+  }
+}
+
+.music-right-side {
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    background: linear-gradient(230deg, white, rgba(0, 0, 0));
+    border-radius: 50%;
+    height: 100%;
+    width: 100%;
+    filter: blur(100px);
+  }
+
+  & img {
+    position: relative;
+    z-index: 5;
+  }
+}
+
 @media (max-width: 1610px) {
   .landing {
     padding: 0 1rem !important;
@@ -267,6 +342,31 @@
     & h1 {
       font-size: 35px;
       letter-spacing: 2px;
+    }
+  }
+
+  .music {
+    margin: 3rem 1rem;
+    padding: 4rem 2rem;
+  }
+
+  .music-left-side {
+    & h2 {
+      width: 65%;
+    }
+  }
+
+  .music-right-side {
+    width: 700px;
+
+    &::before {
+      width: 700px;
+      height: 700px;
+      opacity: 0.6;
+    }
+
+    & img {
+      width: 100%;
     }
   }
 }
@@ -313,6 +413,33 @@
     & h3 {
       font-size: 20px;
     }
+  }
+
+  .music {
+    margin: 3rem 1rem;
+    padding: 4rem 2rem;
+  }
+
+  .music-left-side {
+    color: white;
+    & h2 {
+      font-size: 38px;
+      letter-spacing: 1px;
+      width: 75%;
+    }
+
+    & .time-left {
+      gap: 1rem;
+    }
+  }
+}
+
+.music-right-side {
+  width: 500px;
+
+  &::before {
+    width: 500px;
+    height: 500px;
   }
 }
 
@@ -384,6 +511,34 @@
   }
 }
 
+@media (max-width: 991px) {
+  .music {
+    justify-content: center;
+  }
+
+  .music-right-side {
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+
+    &::before {
+      width: 500px;
+      height: 500px;
+      opacity: 0.7;
+    }
+
+    & img {
+      max-width: fit-content;
+    }
+  }
+
+  .music-left-side {
+    & h2 {
+      width: 100%;
+    }
+  }
+}
+
 @media (max-width: 767px) {
   .landing-right-side {
     padding: 2rem;
@@ -449,6 +604,16 @@
   .speakers-perfume {
     gap: 1.2rem;
   }
+
+  .music-right-side {
+    &::before {
+      width: 300px;
+      height: 300px;
+    }
+    & img {
+      max-width: 90%;
+    }
+  }
 }
 
 @media (max-width: 350px) {
@@ -462,5 +627,29 @@
 
   .cate {
     font-size: 1.8rem;
+  }
+
+  .music {
+    padding: 1rem;
+  }
+
+  .music-left-side {
+    & h2 {
+      font-size: 25px;
+      width: 100%;
+    }
+
+    & .time-left {
+      gap: 0.6rem;
+
+      & .time-box {
+        width: 55px;
+        height: 55px;
+
+        & span:last-child {
+          font-size: 10px;
+        }
+      }
+    }
   }
 }

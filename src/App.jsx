@@ -18,6 +18,7 @@ import NotFound from "./pages/not-found/NotFound";
 import "./App.css";
 
 import { useSelector } from "react-redux";
+import Wishlist from "./pages/wishlist/Wishlist";
 
 export default function App() {
   const { isAuthenticated } = useSelector((state) => state.auth);
@@ -29,6 +30,8 @@ export default function App() {
         <Route path="contact" element={<Contact />} />
         <Route path="about" element={<About />} />
         <Route path="sign-up" element={<SignUp />} />
+        <Route path="wish-list" element={<Wishlist />} />
+
         <Route
           path="account"
           element={<Account />}

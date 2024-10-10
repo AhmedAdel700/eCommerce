@@ -25,15 +25,23 @@ export default function SliderComp({
   btn,
   slider,
   categories,
-  sliderProduct,
+  section,
 }) {
   const [likes, setLikes] = useState({}); // Store the like state for each product
 
   let settings = {
     dots: false,
-    infinite: categories ? true : false,
-    slidesToShow: categories ? 6 : 5.5,
-    slidesToScroll: categories ? 6 : 5,
+    infinite: categories ? true : section ? false : false,
+    slidesToShow: categories
+      ? 6 // If categories are present, show 6 slides
+      : section
+      ? 4 // If sections are present (but no categories), show 5 slides
+      : 5.5,
+    slidesToScroll: categories
+      ? 6 // If categories are present
+      : section
+      ? 1 // If sections are present (but no categories)
+      : 5,
     arrows: false,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
@@ -58,7 +66,11 @@ export default function SliderComp({
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: categories ? 1 : 1.5,
+          slidesToShow: categories
+            ? 1 // If categories are present
+            : section
+            ? 1.5 // If sections are present (but no categories)
+            : 1.5,
           slidesToScroll: 1,
         },
       },

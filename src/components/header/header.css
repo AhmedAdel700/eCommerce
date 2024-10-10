@@ -45,6 +45,10 @@ header .summer-sale .lang {
   cursor: pointer;
 }
 
+.lang-list {
+  color: white !important;
+}
+
 header .nav-icons {
   padding: 40px var(--main-padding) 14px;
   border-bottom: 1px solid #0000001e;
@@ -135,6 +139,10 @@ header .controls {
   header .nav-icons {
     padding: 15px !important;
     border-bottom: 1px solid #f5f5f5;
+  }
+
+  header nav {
+    gap: 28px;
   }
 
   header nav a {
