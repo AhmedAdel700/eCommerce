@@ -30,15 +30,10 @@ export default function Home() {
 
   const dispatch = useDispatch();
 
-useEffect(() => {
-  const fetchProducts = async () => {
-    await dispatch(addProducts());
-    await dispatch(addLimitedProducts({ limit: 4, page: 3 }));
-  };
-
-  fetchProducts();
-}, [dispatch]);
-
+  useEffect(() => {
+    dispatch(addProducts());
+    dispatch(addLimitedProducts({ limit: 4, page: 3 }));
+  }, [dispatch]);
 
   const [open, setOpen] = useState(false);
 
@@ -218,7 +213,12 @@ useEffect(() => {
         ) : error ? ( // Check for error
           <h2 className="error">An error occurred: {error}</h2> // Display error message
         ) : (
-          <SliderComp products={products} btn={true} slider={sliderProduct} />
+          <SliderComp
+            products={products}
+            btn={true}
+            slider={sliderProduct}
+            likeIcon={true}
+          />
         )}
 
         <Link to={"about"} style={{ margin: "0 auto" }}>
@@ -336,7 +336,12 @@ useEffect(() => {
         ) : error ? ( // Check for error
           <h2 className="error">An error occurred: {error}</h2> // Display error message
         ) : (
-          <SliderComp products={limitedProducts} btn={true} section={true} />
+          <SliderComp
+            products={limitedProducts}
+            btn={true}
+            section={true}
+            likeIcon={true}
+          />
         )}
       </section>
 

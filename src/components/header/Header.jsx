@@ -123,6 +123,7 @@ export default function Header() {
 
   const dispatch = useDispatch();
   const { isAuthenticated } = useSelector((state) => state.auth);
+  const { wishlist } = useSelector((state) => state.wishlist);
 
   const [active, setActive] = useState(false);
 
@@ -328,8 +329,14 @@ export default function Header() {
             <SearchIcon className="search-i" />
           </Box>
 
-          <Link to="wish-list" style={{ paddingTop: "5px" }}>
+          <Link
+            to="wish-list"
+            style={{ paddingTop: "5px", position: "relative" }}
+          >
             <FavoriteBorderOutlinedIcon sx={{ cursor: "pointer" }} />
+            {wishlist.length > 0 && (
+              <div className="wish-list-number">{wishlist.length}</div>
+            )}
           </Link>
 
           <CartLogo />

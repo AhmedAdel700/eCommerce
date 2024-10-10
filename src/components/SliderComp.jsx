@@ -8,7 +8,9 @@ import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import { useState } from "react";
+
+import { addToWishlist, toggleLike } from "../store/wishlistSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 function SampleNextArrow(props) {
   const { className, onClick } = props;
@@ -20,14 +22,9 @@ function SamplePrevArrow(props) {
   return <div className={className} onClick={onClick} />;
 }
 
-export default function SliderComp({
-  products,
-  btn,
-  slider,
-  categories,
-  section,
-}) {
-  const [likes, setLikes] = useState({}); // Store the like state for each product
+export default function SliderComp({ products, btn, slider, categories, section, likeIcon }) {
+  const dispatch = useDispatch();
+  const likes = useSelector((state) => state.wishlist.likes);
 
   let settings = {
     dots: false,
@@ -77,11 +74,10 @@ export default function SliderComp({
     ],
   };
 
-  const handleLikeClick = (productId) => {
-    setLikes((prevLikes) => ({
-      ...prevLikes,
-      [productId]: !prevLikes[productId], // Toggle like state for the clicked product
-    }));
+  const handleLikeClick = (product) => {
+    dispatch(toggleLike(product.id));
+
+    dispatch(addToWishlist(product));
   };
 
   const renderedProducts = products?.products?.map((product) => {
@@ -97,16 +93,16 @@ export default function SliderComp({
           </div>
 
           <div className="like">
-            <Box
-              tabIndex={0}
-              onClick={() => handleLikeClick(product.id)} // Call function on click
-            >
-              {likes[product.id] ? (
-                <FavoriteOutlinedIcon />
-              ) : (
-                <FavoriteBorderIcon />
-              )}
-            </Box>
+            {likeIcon && (
+              <Box tabIndex={0} onClick={() => handleLikeClick(product)}>
+                {likes[product.id] ? (
+                  <FavoriteOutlinedIcon />
+                ) : (
+                  <FavoriteBorderIcon />
+                )}
+              </Box>
+            )}
+
             <Link to={`/products/${product.id}`}>
               <Box>
                 <RemoveRedEyeOutlinedIcon />

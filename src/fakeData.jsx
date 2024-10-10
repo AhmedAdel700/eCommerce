@@ -79,38 +79,3 @@ export const arrayOfLinks = [
     path: "/health-and-beauty",
   },
 ];
-
-export const bestSelling = [
-  {
-    img: "",
-    name: "The north coat",
-    priceWithDiscount: 260,
-    price: 360,
-    stars: "",
-    rating: "(65)",
-  },
-  {
-    img: "",
-    name: "Gucci duffle bag",
-    priceWithDiscount: 260,
-    price: 360,
-    stars: "",
-    rating: "(65)",
-  },
-  {
-    img: "",
-    name: "RGB liquid CPU Cooler",
-    priceWithDiscount: 260,
-    price: 360,
-    stars: "",
-    rating: "(65)",
-  },
-  {
-    img: "",
-    name: "Small BookSelf",
-    priceWithDiscount: 260,
-    price: 360,
-    stars: "",
-    rating: "(65)",
-  },
-];
