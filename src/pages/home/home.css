@@ -108,7 +108,8 @@
 }
 
 .sale,
-.cate {
+.cate,
+.best-selling {
   font-size: 36px;
   font-weight: 600;
 }
@@ -592,6 +593,10 @@
     font-size: 2rem;
   }
 
+  .best-selling {
+    font-size: 1.8rem;
+  }
+
   .featured .arrival {
     gap: 0.8rem;
     flex-direction: column;
@@ -605,6 +610,12 @@
     gap: 1.2rem;
   }
 
+  .music-left-side {
+    & h2 {
+      font-size: 28px;
+    }
+  }
+
   .music-right-side {
     &::before {
       width: 300px;
@@ -613,6 +624,7 @@
     & img {
       max-width: 90%;
     }
+
   }
 }
 
@@ -627,6 +639,10 @@
 
   .cate {
     font-size: 1.8rem;
+  }
+
+  .best-selling {
+    font-size: 1.6rem;
   }
 
   .music {
