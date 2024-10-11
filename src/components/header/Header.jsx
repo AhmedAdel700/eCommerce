@@ -12,16 +12,12 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import CartLogo from "../CartLogo";
 import { Stack } from "@mui/material";
 
-import LogoutIcon from "@mui/icons-material/Logout";
-import HighlightOffIcon from "@mui/icons-material/HighlightOff";
-import StarBorderRoundedIcon from "@mui/icons-material/StarBorderRounded";
-import LocalMallOutlinedIcon from "@mui/icons-material/LocalMallOutlined";
-
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../store/authSlice";
 
+import { languages, links, menuItems } from "../../fakeData";
 import "./header.css";
 
 //Language Menu Styles
@@ -130,6 +126,9 @@ export default function Header() {
   const [anchorEl, setAnchorEl] = useState(null);
   const [selectedLanguage, setSelectedLanguage] = useState("English");
 
+  const [toggleMenu, setToggleMenu] = useState(null);
+  const openAccount = Boolean(toggleMenu);
+
   const open = Boolean(anchorEl);
 
   const handleClick = (event) => {
@@ -154,8 +153,6 @@ export default function Header() {
     handleClose();
   };
 
-  const languages = ["Arabic", "English", "French", "German", "Japanese"];
-
   const languageList = languages.map((lang) => {
     return (
       <MenuItem
@@ -169,13 +166,6 @@ export default function Header() {
     );
   });
 
-  const links = [
-    { linkName: "Home", path: "/" },
-    { linkName: "Contact", path: "/contact" },
-    { linkName: "About", path: "/about" },
-    { linkName: "Sign Up", path: "/sign-up" },
-  ];
-
   const navLinks = links.map((link) => {
     return (
       <Link
@@ -188,7 +178,6 @@ export default function Header() {
         }
       >
         {link.linkName}
-        {/* <hr style={{ width: "25%" , margin:"0 auto" }} /> */}
       </Link>
     );
   });
@@ -206,37 +195,6 @@ export default function Header() {
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
-
-  const [toggleMenu, setToggleMenu] = useState(null);
-  const openAccount = Boolean(toggleMenu);
-
-  const menuItems = [
-    {
-      icon: <PersonOutlineOutlinedIcon />,
-      label: "Manage My Account",
-      link: "account",
-    },
-    {
-      icon: <LocalMallOutlinedIcon />,
-      label: "My Order",
-      link: ".",
-    },
-    {
-      icon: <HighlightOffIcon />,
-      label: "My Cancellations",
-      link: ".",
-    },
-    {
-      icon: <StarBorderRoundedIcon />,
-      label: "My Reviews",
-      link: ".",
-    },
-    {
-      icon: <LogoutIcon sx={{ transform: "scaleX(-1)" }} />,
-      label: "Logout",
-      link: "/sign-up",
-    },
-  ];
 
   const renderMenuItems = () => {
     return menuItems.map((item, index) => (
@@ -325,7 +283,7 @@ export default function Header() {
         <nav
           style={{
             top: active ? "100%" : "-250%",
-            opacity: active ? "0.9" : "0",
+            opacity: active && smallScreens && "0.9",
           }}
         >
           {navLinks}

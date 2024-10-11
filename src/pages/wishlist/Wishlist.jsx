@@ -127,6 +127,7 @@ export default function Wishlist() {
             btn={true}
             section={true}
             likeIcon={false}
+            cartIcon={true}
           />
         )}
       </section>

@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
-import { Box, Button } from "@mui/material";
+import { Box, Button, Stack } from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
+import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 
 // React Slick Css Files
 import "slick-carousel/slick/slick.css";
@@ -15,6 +17,7 @@ import {
   toggleLike,
 } from "../store/wishlistSlice";
 import { useDispatch, useSelector } from "react-redux";
+
 
 function SampleNextArrow(props) {
   const { className, onClick } = props;
@@ -33,6 +36,7 @@ export default function SliderComp({
   categories,
   section,
   likeIcon,
+  cartIcon,
 }) {
   const dispatch = useDispatch();
   const likes = useSelector((state) => state.wishlist.likes);
@@ -97,13 +101,11 @@ export default function SliderComp({
     return (
       <div key={product.id} className="product">
         <div className="product-img">
-          <div className="discount">
-            {product.discount ? (
+          {product.discount && (
+            <div className="discount">
               <div className="discount-percentage">-{product.discount}%</div>
-            ) : (
-              "0%"
-            )}
-          </div>
+            </div>
+          )}
 
           <div className="like">
             {likeIcon && (
@@ -124,18 +126,26 @@ export default function SliderComp({
           </div>
 
           {btn && (
-            <div className="add-to-cart">
+            <div
+              className="add-to-cart"
+              style={{
+                transform: cartIcon ? "translateY(0%)" : "translateY(101%)",
+              }}
+            >
               <Button
                 sx={{
                   width: "100%",
                   color: "white",
                   textTransform: "capitalize",
                   fontWeight: "500",
-                  fontSize: "1rem",
-                  lineHeight: "1.5",
+                  fontSize: "0.9rem",
+                  lineHeight: "1.4",
                   textAlign: "center",
                 }}
               >
+                {cartIcon && (
+                  <ShoppingCartOutlinedIcon sx={{ marginRight: "0.3rem" }} />
+                )}
                 Add To Cart
               </Button>
             </div>
@@ -157,6 +167,20 @@ export default function SliderComp({
             ${product.price}
           </p>
         </div>
+
+        <Stack direction={"row"} className="rating">
+          <StarRateRoundedIcon className="star" />
+          <StarRateRoundedIcon className="star" />
+          <StarRateRoundedIcon className="star" />
+          <StarRateRoundedIcon className="star" />
+          <StarRateRoundedIcon />
+          <span
+            style={{ fontWeight: "500", color: "#a39a9a" }}
+            className="star"
+          >
+            (88)
+          </span>
+        </Stack>
       </div>
     );
   });

@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-const initialState = { products: [], loading: false, error: null, limitedProducts: [] };
+const initialState = { products: [], loading: false, error: null, limitedProducts: []};
 
 export const addLimitedProducts = createAsyncThunk("products/addLimitedProducts", async ({ limit = 20, page = 1 } = {}, thunkAPI) => {
     const { rejectWithValue } = thunkAPI
@@ -33,6 +33,11 @@ export const addProducts = createAsyncThunk("products/addProducts", async ({ pro
 const productSlice = createSlice({
     name: "products",
     initialState,
+    // reducers: {
+    //     addSingleProduct: (state, action) => {
+    //         state.singleProduct = action.payload
+    //     }
+    // },
     extraReducers: (builder) => {
         builder
             // Get All Products Or Single Product
@@ -67,4 +72,5 @@ const productSlice = createSlice({
     }
 })
 
+// export const { addSingleProduct } = productSlice.actions;
 export default productSlice.reducer;

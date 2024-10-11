@@ -47,15 +47,6 @@ export default function Home() {
     );
   });
 
-  // Get A Single Product
-  // const singleProduct = () => {
-  //   return (
-  //     <div key={products?.product?.id}>
-  //       <img src={products?.product?.image} />
-  //     </div>
-  //   );
-  // };
-
   return (
     <main>
       {redirectState.state && (
@@ -218,6 +209,7 @@ export default function Home() {
             btn={true}
             slider={sliderProduct}
             likeIcon={true}
+            cartIcon={false}
           />
         )}
 
@@ -281,7 +273,12 @@ export default function Home() {
           <h2 className="error">An error occurred: {error}</h2> // Display error message
         ) : (
           <Box className="category-box">
-            <SliderComp categories={categories} slider={slider} btn={false} />
+            <SliderComp
+              categories={categories}
+              slider={slider}
+              btn={false}
+              cartIcon={false}
+            />
           </Box>
         )}
       </section>
@@ -342,6 +339,7 @@ export default function Home() {
             section={true}
             likeIcon={true}
             loading={loading}
+            cartIcon={false}
           />
         )}
       </section>

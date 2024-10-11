@@ -6,6 +6,12 @@ import CameraAltOutlinedIcon from "@mui/icons-material/CameraAltOutlined";
 import HeadsetOutlinedIcon from "@mui/icons-material/HeadsetOutlined";
 import KeyboardArrowRightOutlinedIcon from "@mui/icons-material/KeyboardArrowRightOutlined";
 
+import LogoutIcon from "@mui/icons-material/Logout";
+import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+import StarBorderRoundedIcon from "@mui/icons-material/StarBorderRounded";
+import LocalMallOutlinedIcon from "@mui/icons-material/LocalMallOutlined";
+import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
+
 export const categories = [
   {
     id: 1,
@@ -79,3 +85,42 @@ export const arrayOfLinks = [
     path: "/health-and-beauty",
   },
 ];
+
+export const menuItems = [
+  {
+    icon: <PersonOutlineOutlinedIcon />,
+    label: "Manage My Account",
+    link: "account",
+  },
+  {
+    icon: <LocalMallOutlinedIcon />,
+    label: "My Order",
+    link: ".",
+  },
+  {
+    icon: <HighlightOffIcon />,
+    label: "My Cancellations",
+    link: ".",
+  },
+  {
+    icon: <StarBorderRoundedIcon />,
+    label: "My Reviews",
+    link: ".",
+  },
+  {
+    icon: <LogoutIcon sx={{ transform: "scaleX(-1)" }} />,
+    label: "Logout",
+    link: "/sign-up",
+  },
+];
+
+export const links = [
+  { linkName: "Home", path: "/" },
+  { linkName: "Contact", path: "/contact" },
+  { linkName: "About", path: "/about" },
+  { linkName: "Sign Up", path: "/sign-up" },
+];
+
+export const languages = ["Arabic", "English", "French", "German", "Japanese"];
+
+export const sizesArray = ["XS", "S", "M", "L", "XL"];
