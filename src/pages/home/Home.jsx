@@ -341,6 +341,7 @@ export default function Home() {
             btn={true}
             section={true}
             likeIcon={true}
+            loading={loading}
           />
         )}
       </section>

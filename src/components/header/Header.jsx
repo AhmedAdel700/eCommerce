@@ -188,6 +188,7 @@ export default function Header() {
         }
       >
         {link.linkName}
+        {/* <hr style={{ width: "25%" , margin:"0 auto" }} /> */}
       </Link>
     );
   });
@@ -321,7 +322,14 @@ export default function Header() {
           Exclusive
         </div>
 
-        <nav style={{ left: active ? "0" : "-100%" }}>{navLinks}</nav>
+        <nav
+          style={{
+            top: active ? "100%" : "-250%",
+            opacity: active ? "0.9" : "0",
+          }}
+        >
+          {navLinks}
+        </nav>
 
         <Box className="controls">
           <Box className="search">

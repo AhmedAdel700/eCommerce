@@ -116,7 +116,9 @@ export default function Wishlist() {
 
         {/* Render The Slider Data => The Products*/}
         {loading ? (
-          <h2 className="loading">Loading ...</h2>
+          <>
+            <h2 className="loading">Loading ...</h2>
+          </>
         ) : error ? ( // Check for error
           <h2 className="error">An error occurred: {error}</h2> // Display error message
         ) : (
