@@ -1,6 +1,7 @@
 import { Await, defer, Link, redirect, useLoaderData } from "react-router-dom";
 
 import { Box, Button, Stack } from "@mui/material";
+import Radio from "@mui/material/Radio";
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
 
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
@@ -16,7 +17,11 @@ import SliderComp from "../../components/SliderComp";
 import { useSelector, useDispatch } from "react-redux";
 import { addCategory } from "../../store/productSlice";
 import "./singleproduct.css";
-import { addToWishlist, removeFromWishlist, toggleLike } from "../../store/wishlistSlice";
+import {
+  addToWishlist,
+  removeFromWishlist,
+  toggleLike,
+} from "../../store/wishlistSlice";
 
 export function loader({ params }) {
   async function getProduct(id) {
@@ -47,9 +52,11 @@ export default function SingleProduct() {
   const [relatedCategory, setRelatedCategory] = useState("");
   const [productName, setProductName] = useState("");
   const [choosenSize, setChoosenSize] = useState("M");
+  const [color, setColor] = useState(true);
+  const [counter, setCounter] = useState(0);
 
   const { loading, error, category } = useSelector((state) => state.products);
-    const likes = useSelector((state) => state.wishlist.likes);
+  const likes = useSelector((state) => state.wishlist.likes);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -122,7 +129,7 @@ export default function SingleProduct() {
           <Box className="product-data-right-side">
             <Stack gap={1}>
               <h3 className="title-product">
-                {truncateText(singleProduct.product.title, 100)}.
+                {truncateText(singleProduct.product.title, 40)}.
               </h3>
 
               <Stack direction={"row"} alignItems={"center"} className="rating">
@@ -161,14 +168,21 @@ export default function SingleProduct() {
               <Stack direction={"row"} gap={3}>
                 <p className="price-single-product">Colours:</p>
 
-                <Stack
-                  direction={"row"}
-                  gap={1}
-                  alignItems={"center"}
-                  className="colors"
-                >
-                  <div></div>
-                  <div></div>
+                <Stack direction={"row"} gap={0} alignItems={"center"}>
+                  <Radio
+                    color="info"
+                    checked
+                    onClick={() => setColor(true)}
+                    className={color && "color"}
+                  />
+                  <Box>
+                    <Radio
+                      color="error"
+                      checked
+                      onClick={() => setColor(false)}
+                      className={!color && "color"}
+                    />
+                  </Box>
                 </Stack>
               </Stack>
 
@@ -199,11 +213,24 @@ export default function SingleProduct() {
                   justifyContent={"space-between"}
                   className="add-subtract"
                 >
-                  <Button sx={{ width: "10px" }}>
+                  <Button
+                    sx={{ width: "10px" }}
+                    onClick={() => {
+                      if (counter !== 0) {
+                        setCounter((prev) => prev - 1);
+                      }
+                    }}
+                  >
                     <RemoveOutlinedIcon />
                   </Button>
-                  <Box className="quntity">0</Box>
-                  <Button>
+                  <Box className="quntity" z>
+                    {counter}
+                  </Box>
+                  <Button
+                    onClick={() => {
+                      setCounter((prev) => prev + 1);
+                    }}
+                  >
                     <AddOutlinedIcon />
                   </Button>
                 </Stack>
@@ -233,26 +260,42 @@ export default function SingleProduct() {
                 </button>
               </Stack>
 
-              <Stack className="delivery" justifyContent={"space-between"}>
-                <Stack direction={"row"} alignItems={"center"} gap={3}>
-                  <LocalShippingOutlinedIcon />
+              <Stack className="delivery" justifyContent={"space-evenly"}>
+                <Stack direction={"row"} alignItems={"center"} gap={1}>
+                  <LocalShippingOutlinedIcon fontSize="large" />
                   <Box>
-                    <h5>Free Delivery</h5>
-                    <p style={{ textDecoration: "underLine" }}>
+                    <h4>Free Delivery</h4>
+                    <p
+                      style={{
+                        textDecoration: "underLine",
+                        fontSize: "0.9rem",
+                        fontWeight: "500",
+                        cursor: "pointer",
+                      }}
+                    >
                       Enter your postal code for Delivery Availability
                     </p>
                   </Box>
                 </Stack>
-                <Stack direction={"row"} alignItems={"center"} gap={3}>
-                  <LoopIcon />
+
+                <hr />
+
+                <Stack direction={"row"} alignItems={"center"} gap={1}>
+                  <LoopIcon fontSize="large" />
                   <Box>
-                    <h5>Return Delivery</h5>
-                    <p>
+                    <h4>Return Delivery</h4>
+                    <p
+                      style={{
+                        fontSize: "0.9rem",
+                        fontWeight: "500",
+                      }}
+                    >
                       Free 30 Days Delivery Returns.
                       <span
                         style={{
                           textDecoration: "underLine",
                           marginLeft: "0.5rem",
+                          cursor: "pointer",
                         }}
                       >
                         Details

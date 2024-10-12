@@ -305,7 +305,9 @@ export default function Header() {
             )}
           </Link>
 
-          <CartLogo />
+          <Link to="cart">
+            <CartLogo />
+          </Link>
 
           {isAuthenticated && (
             <PersonOutlineOutlinedIcon

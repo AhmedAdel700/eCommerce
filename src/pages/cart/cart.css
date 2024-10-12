@@ -1,0 +1,146 @@
+.cart-page {
+  margin: 2rem var(--main-padding);
+  max-width: 100vw;
+  min-height: fit-content;
+}
+
+.cart-page .cart-items {
+  margin-top: 2rem;
+
+  & button {
+    border: 1px solid #000;
+    width: 218px;
+    height: 56px;
+    border-radius: 4px;
+    color: #000;
+    text-transform: capitalize;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+}
+
+.cart-page .cart-items .cart-single-item {
+  height: 72px;
+  width: 100%;
+  padding: 0 2rem;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 4px;
+
+  & h4 {
+    font-size: 1rem;
+    font-weight: 500;
+  }
+}
+
+.cart-user-info {
+  margin-top: 3rem;
+}
+
+.coupon {
+  & form {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    & input {
+      width: 300px;
+      height: 56px;
+      border-radius: 4px;
+      padding: 0 1.2rem;
+      font-size: 1rem;
+      color: var(--red-color);
+      outline: none;
+      border: 1px solid #000;
+    }
+  }
+}
+
+.apply,
+.checkout {
+  background-color: var(--red-color) !important;
+  width: 218px;
+  height: 56px;
+  border-radius: 4px;
+  color: white;
+  text-transform: capitalize !important;
+  font-size: 1.1rem !important;
+  font-weight: 500 !important;
+}
+
+.total {
+  border: 2px solid #000;
+  border-radius: 4px;
+  width: 470px;
+  height: 324px;
+  padding: 1rem;
+
+  & a {
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 1250px) {
+  .cart-page {
+    margin: 2rem 1rem !important;
+  }
+}
+
+@media (max-width: 1024px) {
+  .cart-user-info {
+    margin-top: 2rem;
+    flex-direction: column !important;
+    gap: 2rem !important;
+
+    & .total {
+      width: 100%;
+      min-height: fit-content;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .cart-page {
+    margin: 1rem !important;
+  }
+
+  .cart-page .cart-items {
+    margin-top: 1rem;
+
+    & button {
+      width: 150px;
+      height: 46px;
+      font-size: 0.9rem;
+    }
+  }
+
+  .cart-page .cart-items .cart-single-item {
+    padding: 0 1rem;
+    height: 60px;
+
+    & h4 {
+      font-size: 0.85rem;
+    }
+  }
+
+  .cart-user-info {
+    flex-direction: column !important;
+  }
+
+  .coupon {
+    margin-top: 3rem;
+
+    & form {
+      justify-content: center;
+      gap: 1rem;
+      flex-direction: column;
+
+      & input {
+        width: 100%;
+      }
+    }
+  }
+
+  .apply {
+    width: 100% !important;
+  }
+}

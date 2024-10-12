@@ -24,6 +24,8 @@ import "./App.css";
 
 import { useSelector } from "react-redux";
 import Error from "./pages/error/Error";
+import Cart from "./pages/cart/Cart";
+import Checkout from "./pages/checkout/Checkout";
 
 export default function App() {
   const { isAuthenticated } = useSelector((state) => state.auth);
@@ -36,6 +38,8 @@ export default function App() {
         <Route path="about" element={<About />} />
         <Route path="sign-up" element={<SignUp />} />
         <Route path="wish-list" element={<Wishlist />} />
+        <Route path="cart" element={<Cart />} />
+        <Route path="cart/checkout" element={<Checkout />} />
 
         <Route path="products" element={<Products />} />
         <Route

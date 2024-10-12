@@ -12,7 +12,9 @@ import ScrollToTopButton from "../../components/ScrollToTopButton";
 export default function SginUp() {
   const dispatch = useDispatch();
 
-  let { redirectState, isAuthenticated } = useSelector((state) => state.auth);
+  let { redirectState, isAuthenticated, checkout } = useSelector(
+    (state) => state.auth
+  );
 
   const navigate = useNavigate();
 
@@ -38,7 +40,7 @@ export default function SginUp() {
   };
 
   if (redirectState.state) {
-    navigate("/");
+    navigate(checkout ? "cart/checkout" : "/");
 
     setTimeout(() => {
       dispatch(changeDirection({ state: false, type: redirectState.type }));

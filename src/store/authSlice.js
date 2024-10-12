@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     isAuthenticated: false,
+    checkout: false,
     redirectState: {
         state: false,
         type: null,
@@ -24,10 +25,13 @@ const authSlice = createSlice({
         },
         logout: (state) => {
             state.isAuthenticated = false;
+        },
+        checkout: (state) => {
+            state.checkout = true;
         }
     }
 })
 
-export const { isLoggedIn, changeDirection, logout } = authSlice.actions;
+export const { isLoggedIn, changeDirection, logout, checkout } = authSlice.actions;
 
 export default authSlice.reducer;
