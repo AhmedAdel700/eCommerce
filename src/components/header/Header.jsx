@@ -10,6 +10,7 @@ import WidgetsOutlinedIcon from "@mui/icons-material/WidgetsOutlined";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import CartLogo from "../CartLogo";
+import Badge from "@mui/material/Badge";
 import { Stack } from "@mui/material";
 
 import { useEffect, useState } from "react";
@@ -19,6 +20,17 @@ import { logout } from "../../store/authSlice";
 
 import { languages, links, menuItems } from "../../fakeData";
 import "./header.css";
+
+// Cart Badge Styles
+
+const StyledBadge = styled(Badge)(({ theme }) => ({
+  "& .MuiBadge-badge": {
+    right: 8,
+    top: 15,
+    border: `2px solid ${theme.palette.background.paper}`,
+    padding: "0 4px",
+  },
+}));
 
 //Language Menu Styles
 
@@ -120,6 +132,7 @@ export default function Header() {
   const dispatch = useDispatch();
   const { isAuthenticated } = useSelector((state) => state.auth);
   const { wishlist } = useSelector((state) => state.wishlist);
+  const { cartData } = useSelector((state) => state.cart);
 
   const [active, setActive] = useState(false);
 
@@ -306,7 +319,9 @@ export default function Header() {
           </Link>
 
           <Link to="cart">
-            <CartLogo />
+            <StyledBadge badgeContent={cartData.length} color="error">
+              <CartLogo />
+            </StyledBadge>
           </Link>
 
           {isAuthenticated && (

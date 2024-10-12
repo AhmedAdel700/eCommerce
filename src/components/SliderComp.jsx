@@ -106,7 +106,7 @@ export default function SliderComp({
       <div key={product.id} className="product">
         <div
           className="product-img"
-          style={{ height: height ? "320px" : "230px" }}
+          style={{ height: height ? "320px" : "225px" }}
         >
           {product.discount && (
             <div className="discount">

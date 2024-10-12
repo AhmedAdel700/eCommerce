@@ -22,6 +22,7 @@ import {
   removeFromWishlist,
   toggleLike,
 } from "../../store/wishlistSlice";
+import { addToCart } from "../../store/cartSlice";
 
 export function loader({ params }) {
   async function getProduct(id) {
@@ -235,17 +236,20 @@ export default function SingleProduct() {
                   </Button>
                 </Stack>
 
-                <Button
-                  className="buy-now"
-                  variant="contained"
-                  sx={{
-                    backgroundColor: "var(--red-color)",
-                    textTransform: "capitalize",
-                    fontSize: "1rem",
-                  }}
-                >
-                  Buy Now
-                </Button>
+                <Link to="/cart">
+                  <Button
+                    onClick={() => dispatch(addToCart(singleProduct.product))}
+                    className="buy-now"
+                    variant="contained"
+                    sx={{
+                      backgroundColor: "var(--red-color)",
+                      textTransform: "capitalize",
+                      fontSize: "1rem",
+                    }}
+                  >
+                    Buy Now
+                  </Button>
+                </Link>
 
                 <button
                   className="like-btn"

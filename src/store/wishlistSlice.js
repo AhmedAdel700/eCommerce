@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = { wishlist: [], likes: {} };
+const initialState = { wishlist: JSON.parse(localStorage.getItem('wishlistData')) || [], likes: {} };
 
 const wishlistSlice = createSlice({
     name: "products",
@@ -12,6 +12,9 @@ const wishlistSlice = createSlice({
             if (!exists) {
                 state.wishlist.push(action.payload);
             }
+
+            // Add it to local storage
+            localStorage.setItem("wishlistData", JSON.stringify(state.wishlist));
         },
         toggleLike: (state, action) => {
             const productId = action.payload;
@@ -26,6 +29,9 @@ const wishlistSlice = createSlice({
         removeFromWishlist: (state, action) => {
             const productId = action.payload;
             state.wishlist = state.wishlist.filter(item => item.id !== productId);
+
+            // Update local storage
+            localStorage.setItem("wishlistData", JSON.stringify(state.wishlist));
         }
     }
 });

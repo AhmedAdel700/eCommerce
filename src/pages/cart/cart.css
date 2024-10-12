@@ -6,6 +6,7 @@
 
 .cart-page .cart-items {
   margin-top: 2rem;
+  gap: 2rem;
 
   & button {
     border: 1px solid #000;
@@ -20,15 +21,38 @@
 }
 
 .cart-page .cart-items .cart-single-item {
-  height: 72px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  height: fit-content;
   width: 100%;
-  padding: 0 2rem;
+  padding: 1rem 2rem;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   border-radius: 4px;
 
   & h4 {
     font-size: 1rem;
     font-weight: 500;
+  }
+
+  &:first-child {
+    height: 70px;
+  }
+
+  & :first-child {
+    justify-self: start;
+    align-self: center;
+  }
+  & :nth-child(2) {
+    place-self: center;
+  }
+  & :nth-child(3) {
+    place-self: center;
+  }
+  & :last-child {
+    justify-self: end;
   }
 }
 
@@ -79,6 +103,55 @@
   }
 }
 
+.cart-image {
+  width: 70px;
+  position: relative;
+
+  & img {
+    width: 100%;
+  }
+}
+
+.cart-image .delete-from-cart {
+  position: absolute;
+  top: 10px;
+  left: -10px;
+  transform: translate(-50%, -50%);
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(219, 9, 9);
+  color: white;
+  cursor: pointer;
+
+  & * {
+    font-size: 1rem;
+  }
+}
+
+.item-cart-name {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-left: 1rem;
+}
+
+.item-quantity {
+  width: 80px;
+  height: 50px;
+  border: 1px solid #000;
+  border-radius: 4px;
+  padding: 0.25rem;
+
+  & .number {
+    flex: 1;
+    text-align: center;
+    font-weight: 500;
+  }
+}
+
 @media (max-width: 1250px) {
   .cart-page {
     margin: 2rem 1rem !important;
@@ -115,7 +188,14 @@
 
   .cart-page .cart-items .cart-single-item {
     padding: 0 1rem;
-    height: 60px;
+
+    &:first-child {
+      height: 50px;
+    }
+
+    &:not(:first-child) {
+      height: 80px;
+    }
 
     & h4 {
       font-size: 0.85rem;
@@ -142,5 +222,24 @@
 
   .apply {
     width: 100% !important;
+  }
+
+  .cart-image {
+    width: 70px;
+
+    & img {
+      width: 100%;
+    }
+  }
+
+  .item-cart-name {
+    display: none;
+  }
+
+  .item-quantity {
+    width: 75px;
+    height: 45px;
+    padding: 0.25rem;
+
   }
 }

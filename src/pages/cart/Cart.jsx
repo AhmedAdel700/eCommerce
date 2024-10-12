@@ -1,16 +1,22 @@
 import { Box, Button, Stack } from "@mui/material";
 import Alert from "@mui/material/Alert";
+import CloseIcon from "@mui/icons-material/Close";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import "./cart.css";
 import { checkout } from "../../store/authSlice";
+import { removeItemFromCart } from "../../store/cartSlice";
+import "./cart.css";
 
 export default function Cart() {
   const { isAuthenticated } = useSelector((state) => state.auth);
+  const { cartData } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
   const [updated, setUpdated] = useState(false);
+  const [quantity, setQuantity] = useState(1);
 
   function removerAlert() {
     updated &&
@@ -20,6 +26,73 @@ export default function Cart() {
   }
 
   removerAlert();
+
+  function truncateText(text = "", maxLength) {
+    if (text.length > maxLength) {
+      return text.substring(0, maxLength);
+    }
+    return text;
+  }
+
+  const renderCartItems = cartData?.map((item) => {
+    return (
+      <Box key={item.id} className="cart-single-item">
+        <Stack className="img-title" direction={"row"}>
+          <Box className="cart-image">
+            <img src={item.image} alt={item.title} />
+
+            <Box
+              className="delete-from-cart"
+              onClick={() => dispatch(removeItemFromCart(item.id))}
+            >
+              <CloseIcon />
+            </Box>
+          </Box>
+          <Box className="item-cart-name">{truncateText(item.title, 15)}</Box>
+        </Stack>
+
+        <p>
+          $
+          {parseFloat(item.price - item.price * (item.discount / 100)).toFixed(
+            2
+          )}
+        </p>
+
+        <Stack
+          direction={"row"}
+          alignItems={"center"}
+          justifyContent={"space-between"}
+          gap={0.5}
+          className="item-quantity"
+        >
+          <Box className="number">{quantity}</Box>
+          <Stack>
+            <KeyboardArrowUpIcon
+              sx={{ cursor: "pointer" }}
+              onClick={() => {
+                setQuantity((prev) => prev + 1);
+              }}
+            />
+            <KeyboardArrowDownIcon
+              sx={{ cursor: "pointer" }}
+              onClick={() => {
+                quantity && setQuantity((prev) => prev - 1);
+              }}
+            />
+          </Stack>
+        </Stack>
+
+        <Box>
+          <p>
+            $
+            {parseFloat(
+              item.price - item.price * (item.discount / 100)
+            ).toFixed(2)}
+          </p>
+        </Box>
+      </Box>
+    );
+  });
 
   return (
     <section className="cart-page">
@@ -40,19 +113,15 @@ export default function Cart() {
         / Cart
       </Stack>
 
-      <Stack className="cart-items" gap={5} justifyContent={"center"}>
-        <Stack
-          className="cart-single-item"
-          justifyContent={"space-between"}
-          alignItems={"center"}
-          direction={"row"}
-          gap={1}
-        >
+      <Stack className="cart-items" justifyContent={"center"}>
+        <Box className="cart-single-item">
           <h4>Product</h4>
           <h4>Price</h4>
           <h4>Quantity</h4>
           <h4>Subtotal</h4>
-        </Stack>
+        </Box>
+
+        {renderCartItems}
 
         <Stack
           justifyContent={"space-between"}
