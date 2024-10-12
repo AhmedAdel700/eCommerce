@@ -8,6 +8,7 @@ import { addLimitedProducts } from "../../store/productSlice";
 import { removeFromWishlist, toggleLike } from "../../store/wishlistSlice";
 import SliderComp from "../../components/SliderComp";
 import "./wishlist.css";
+import { addToCart } from "../../store/cartSlice";
 
 export default function Wishlist() {
   const { wishlist } = useSelector((state) => state.wishlist);
@@ -42,6 +43,7 @@ export default function Wishlist() {
           )}
 
           <Button
+            onClick={() => dispatch(addToCart(item))}
             startIcon={
               <ShoppingCartOutlinedIcon
                 sx={{ fontSize: "1.4rem !important" }}

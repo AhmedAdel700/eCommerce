@@ -17,6 +17,7 @@ import {
   toggleLike,
 } from "../store/wishlistSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../store/cartSlice";
 
 function SampleNextArrow(props) {
   const { className, onClick } = props;
@@ -41,6 +42,7 @@ export default function SliderComp({
 }) {
   const dispatch = useDispatch();
   const likes = useSelector((state) => state.wishlist.likes);
+  const { cartData } = useSelector((state) => state.cart);
 
   let settings = {
     dots: false,
@@ -138,6 +140,7 @@ export default function SliderComp({
               }}
             >
               <Button
+                onClick={() => dispatch(addToCart(product))}
                 sx={{
                   width: "100%",
                   color: "white",
@@ -166,7 +169,12 @@ export default function SliderComp({
         <h5 className="product-title">{product.title}</h5>
         <div className="price">
           {product.discount && (
-            <p>${product.price - product.price * (product.discount / 100)}</p>
+            <p>
+              $
+              {parseFloat(
+                product.price - product.price * (product.discount / 100)
+              ).toFixed(2)}
+            </p>
           )}
           <p className={product.discount ? "old-price" : ""}>
             ${product.price}
