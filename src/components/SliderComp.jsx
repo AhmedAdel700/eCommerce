@@ -18,7 +18,6 @@ import {
 } from "../store/wishlistSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-
 function SampleNextArrow(props) {
   const { className, onClick } = props;
   return <div className={className} onClick={onClick}></div>;
@@ -37,6 +36,8 @@ export default function SliderComp({
   section,
   likeIcon,
   cartIcon,
+  rows,
+  height,
 }) {
   const dispatch = useDispatch();
   const likes = useSelector((state) => state.wishlist.likes);
@@ -47,16 +48,17 @@ export default function SliderComp({
     slidesToShow: categories
       ? 6 // If categories are present, show 6 slides
       : section
-      ? 4 // If sections are present (but no categories), show 5 slides
+      ? 4 // If sections are present (but no categories), show 4 slides
       : 5.5,
     slidesToScroll: categories
       ? 6 // If categories are present
       : section
-      ? 1 // If sections are present (but no categories)
+      ? 4 // If sections are present (but no categories)
       : 5,
     arrows: false,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
+    rows: rows ? 2 : 1,
     responsive: [
       {
         breakpoint: 1024,
@@ -100,7 +102,10 @@ export default function SliderComp({
   const renderedProducts = products?.products?.map((product) => {
     return (
       <div key={product.id} className="product">
-        <div className="product-img">
+        <div
+          className="product-img"
+          style={{ height: height ? "320px" : "230px" }}
+        >
           {product.discount && (
             <div className="discount">
               <div className="discount-percentage">-{product.discount}%</div>

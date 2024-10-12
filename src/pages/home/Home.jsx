@@ -10,7 +10,11 @@ import EastIcon from "@mui/icons-material/East";
 import WestIcon from "@mui/icons-material/West";
 
 import { useSelector, useDispatch } from "react-redux";
-import { addProducts, addLimitedProducts } from "../../store/productSlice";
+import {
+  addProducts,
+  addLimitedProducts,
+  addAllProducts,
+} from "../../store/productSlice";
 import { Link } from "react-router-dom";
 
 import { useEffect, useRef, useState } from "react";
@@ -21,18 +25,19 @@ import "./home.css";
 
 export default function Home() {
   const { redirectState } = useSelector((state) => state.auth);
-  const { products, loading, error, limitedProducts } = useSelector(
-    (state) => state.products
-  );
+  const { products, loading, error, limitedProducts, allProducts } =
+    useSelector((state) => state.products);
   const smallScreens = useMediaQuery("(max-width:1150px)");
   const slider = useRef(null);
   const sliderProduct = useRef(null);
+  const multiSlider = useRef(null);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(addProducts());
+    dispatch(addProducts({ limit: 20, page: 6 }));
     dispatch(addLimitedProducts({ limit: 4, page: 3 }));
+    dispatch(addAllProducts());
   }, [dispatch]);
 
   const [open, setOpen] = useState(false);
@@ -340,6 +345,7 @@ export default function Home() {
             likeIcon={true}
             loading={loading}
             cartIcon={false}
+            height={true}
           />
         )}
       </section>
@@ -387,6 +393,84 @@ export default function Home() {
         <Box className="music-right-side">
           <img src="../images/music.png" alt="speaker pic" />
         </Box>
+      </section>
+
+      {/* Explore Our Products Section */}
+
+      <section
+        className="products"
+        style={{
+          maxWidth: "100%",
+          position: "relative",
+          overflow: "hidden",
+          display: "flex",
+          flexDirection: "column",
+          gap: "0.5rem",
+        }}
+      >
+        <Stack gap={2} direction={"row"} alignItems={"center"}>
+          <div className="red"></div>
+          <h4 style={{ color: "var(--red-color)", fontWeight: "600" }}>
+            Our Products
+          </h4>
+        </Stack>
+
+        <Stack direction={"row"} className="header-section">
+          <Stack className="date-text" direction={"row"}>
+            <h2 className="cate">Explore Our Products</h2>
+          </Stack>
+
+          <Stack direction={"row"} gap={3} className="slider-btns">
+            <Box
+              onClick={() => multiSlider.current.slickPrev()}
+              className="prev"
+            >
+              <WestIcon />
+            </Box>
+            <Box
+              onClick={() => multiSlider.current.slickNext()}
+              className="next"
+            >
+              <EastIcon />
+            </Box>
+          </Stack>
+        </Stack>
+
+        {/* Render The Slider Data => The Products*/}
+        {loading ? (
+          <h2 className="loading">Loading ...</h2>
+        ) : error ? ( // Check for error
+          <h2 className="error">An error occurred: {error}</h2> // Display error message
+        ) : (
+          <Box className="category-box">
+            <SliderComp
+              products={allProducts}
+              btn={true}
+              section={true}
+              likeIcon={true}
+              loading={loading}
+              cartIcon={false}
+              slider={multiSlider}
+              rows={true}
+            />
+          </Box>
+        )}
+
+        <Link to={"about"} style={{ margin: "0 auto" }}>
+          <Button
+            variant="contained"
+            sx={{
+              backgroundColor: "var(--red-color)",
+              textTransform: "capitalize",
+              width: "234px",
+              height: "56px",
+              fontSize: "1rem",
+              marginTop: "2rem",
+            }}
+          >
+            View All Products
+          </Button>
+        </Link>
       </section>
 
       {/* Start Of Featured Section */}

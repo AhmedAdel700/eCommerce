@@ -200,7 +200,7 @@
 }
 
 .featured {
-  padding: 1rem var(--main-padding);
+  padding: 0rem var(--main-padding);
 }
 
 .featured .arrival {

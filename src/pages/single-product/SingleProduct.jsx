@@ -1,8 +1,10 @@
-import { Await, defer, redirect, useLoaderData } from "react-router-dom";
+import { Await, defer, Link, redirect, useLoaderData } from "react-router-dom";
 
 import { Box, Button, Stack } from "@mui/material";
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
-import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
 import RemoveOutlinedIcon from "@mui/icons-material/RemoveOutlined";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined";
@@ -12,8 +14,9 @@ import { sizesArray } from "../../fakeData";
 import { Suspense, useEffect, useState } from "react";
 import SliderComp from "../../components/SliderComp";
 import { useSelector, useDispatch } from "react-redux";
-import { addProducts } from "../../store/productSlice";
+import { addCategory } from "../../store/productSlice";
 import "./singleproduct.css";
+import { addToWishlist, removeFromWishlist, toggleLike } from "../../store/wishlistSlice";
 
 export function loader({ params }) {
   async function getProduct(id) {
@@ -24,7 +27,7 @@ export function loader({ params }) {
       const data = await response.json();
       return data;
     } catch (error) {
-      console.error("Failed to fetch product", error);
+      console.error("Failed To Fetch Product", error);
       throw new Error(`Failed To Fetch Product With ID: ${id}`);
     }
   }
@@ -41,15 +44,22 @@ export function loader({ params }) {
 export default function SingleProduct() {
   const dataPromise = useLoaderData(); // this will retrun the promise from defer
 
+  const [relatedCategory, setRelatedCategory] = useState("");
+  const [productName, setProductName] = useState("");
   const [choosenSize, setChoosenSize] = useState("M");
-  const { products, loading, error } = useSelector((state) => state.products);
+
+  const { loading, error, category } = useSelector((state) => state.products);
+    const likes = useSelector((state) => state.wishlist.likes);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (products.length <= 0) {
-      dispatch(addProducts());
-    }
-  }, []);
+    dispatch(addCategory(relatedCategory));
+
+    dataPromise.singleProduct.then((singleProduct) => {
+      setRelatedCategory(singleProduct.product.category);
+      setProductName(singleProduct.product.title);
+    });
+  }, [dataPromise, relatedCategory]);
 
   function truncateText(text = "", maxLength) {
     if (text.length > maxLength) {
@@ -70,15 +80,17 @@ export default function SingleProduct() {
     );
   });
 
+  const handleLikeClick = (product) => {
+    dispatch(toggleLike(product.id));
+
+    dispatch(addToWishlist(product));
+
+    if (likes[product.id]) {
+      dispatch(removeFromWishlist(product.id));
+    }
+  };
+
   function renderTheProduct(singleProduct) {
-    // const category = singleProduct.product.category;
-
-    // async function relatedItems(category) {
-
-    // }
-
-    // relatedItems(category);
-
     return (
       <>
         <Box className="product-data">
@@ -110,7 +122,7 @@ export default function SingleProduct() {
           <Box className="product-data-right-side">
             <Stack gap={1}>
               <h3 className="title-product">
-                {truncateText(singleProduct.product.description, 100)}.
+                {truncateText(singleProduct.product.title, 100)}.
               </h3>
 
               <Stack direction={"row"} alignItems={"center"} className="rating">
@@ -208,8 +220,16 @@ export default function SingleProduct() {
                   Buy Now
                 </Button>
 
-                <button className="like-btn">
-                  <FavoriteBorderOutlinedIcon />
+                <button
+                  className="like-btn"
+                  tabIndex={0}
+                  onClick={() => handleLikeClick(singleProduct.product)}
+                >
+                  {likes[singleProduct.product.id] ? (
+                    <FavoriteOutlinedIcon />
+                  ) : (
+                    <FavoriteBorderIcon />
+                  )}
                 </button>
               </Stack>
 
@@ -250,6 +270,32 @@ export default function SingleProduct() {
 
   return (
     <section className="single-product">
+      <Stack
+        direction={"row"}
+        alignItems={"center"}
+        className="link-single-product"
+      >
+        <Link
+          to="/"
+          style={{
+            color: "var(--text-color)",
+            marginRight: "10px",
+          }}
+        >
+          Home
+        </Link>
+        <Link
+          to="/products"
+          style={{
+            color: "var(--text-color)",
+            marginRight: "10px",
+          }}
+        >
+          / Products
+        </Link>
+        / {truncateText(productName, 15)}...
+      </Stack>
+
       <Suspense fallback={<h1 className="loading">Loading...</h1>}>
         <Await resolve={dataPromise.singleProduct}>{renderTheProduct}</Await>
       </Suspense>
@@ -279,10 +325,11 @@ export default function SingleProduct() {
           <h2 className="error">An error occurred: {error}</h2> // Display error message
         ) : (
           <SliderComp
-            products={products}
+            products={category}
             btn={true}
             likeIcon={true}
             cartIcon={false}
+            section={true}
           />
         )}
       </section>
