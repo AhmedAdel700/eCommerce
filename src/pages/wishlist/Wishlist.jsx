@@ -9,6 +9,7 @@ import { removeFromWishlist, toggleLike } from "../../store/wishlistSlice";
 import SliderComp from "../../components/SliderComp";
 import { addToCart } from "../../store/cartSlice";
 import "./wishlist.css";
+import { Link } from "react-router-dom";
 
 export default function Wishlist() {
   const { wishlist } = useSelector((state) => state.wishlist);
@@ -118,7 +119,9 @@ export default function Wishlist() {
             Just For You
           </h4>
 
-          <Button className="see-all-wish-list">See All</Button>
+          <Button className="see-all-wish-list">
+            <Link to="/products">See All</Link>
+          </Button>
         </Stack>
 
         {/* Render The Slider Data => The Products*/}

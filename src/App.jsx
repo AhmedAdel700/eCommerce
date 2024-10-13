@@ -21,6 +21,7 @@ import NotFound from "./pages/not-found/NotFound";
 import Error from "./pages/error/Error";
 import Cart from "./pages/cart/Cart";
 import Checkout, { loader as checkoutLoader } from "./pages/checkout/Checkout";
+import Category from "./pages/category/Category";
 
 // Css Main Style Sheet
 import "./App.css";
@@ -57,6 +58,8 @@ export default function App() {
           element={<Account />}
           loader={() => accountLoader(isAuthenticated)}
         />
+
+        <Route path="category/:category" element={<Category />} />
 
         <Route path="*" element={<NotFound />} />
       </Route>

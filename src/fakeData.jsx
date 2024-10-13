@@ -17,31 +17,37 @@ export const categories = [
     id: 1,
     name: "Phones",
     icon: <PhoneAndroidOutlinedIcon />,
+    categoryName: "mobile",
   },
   {
     id: 2,
     name: "Computers",
     icon: <DesktopMacOutlinedIcon />,
+    categoryName: "laptop",
   },
   {
     id: 3,
     name: "SmartWatch",
     icon: <WatchOutlinedIcon />,
+    categoryName: "mobile",
   },
   {
     id: 4,
     name: "Camera",
     icon: <CameraAltOutlinedIcon />,
+    categoryName: "appliances",
   },
   {
     id: 5,
     name: "HeadPhones",
     icon: <HeadsetOutlinedIcon />,
+    categoryName: "audio",
   },
   {
     id: 6,
     name: "Gaming",
     icon: <VideogameAssetOutlinedIcon />,
+    categoryName: "gaming",
   },
 ];
 

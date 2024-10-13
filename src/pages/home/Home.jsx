@@ -41,7 +41,7 @@ export default function Home() {
 
   const [open, setOpen] = useState(false);
 
-  const ladningLinks = arrayOfLinks.map((link) => {
+  const landingLinks = arrayOfLinks.map((link) => {
     return (
       <Link to={"products"} key={link.name}>
         <Box className="landing-links">
@@ -83,7 +83,7 @@ export default function Home() {
               }}
             />
           )}
-          {ladningLinks}
+          {landingLinks}
         </div>
 
         <div

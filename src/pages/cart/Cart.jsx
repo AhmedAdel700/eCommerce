@@ -7,7 +7,12 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { checkout } from "../../store/authSlice";
-import { clearCart, removeItemFromCart } from "../../store/cartSlice";
+import {
+  clearCart,
+  removeItemFromCart,
+  setNumberOfItems,
+  setTotalPrice,
+} from "../../store/cartSlice";
 import "./cart.css";
 
 export default function Cart() {
@@ -52,6 +57,8 @@ export default function Cart() {
       return sum;
     }, 0);
     setTotal(newTotal.toFixed(2));
+    dispatch(setTotalPrice(newTotal.toFixed(2)));
+    dispatch(setNumberOfItems(quantities));
   }, [quantities, cartData]);
 
   function removerAlert() {

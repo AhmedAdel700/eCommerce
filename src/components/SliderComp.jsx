@@ -202,7 +202,7 @@ export default function SliderComp({
 
   const renderedCategories = categories?.map((category) => {
     return (
-      <Link to={`/category/${category.id}`} key={category.id}>
+      <Link to={`/category/${category.categoryName}`} key={category.id}>
         <div className="category">
           {category.icon}
           <p>{category.name}</p>
