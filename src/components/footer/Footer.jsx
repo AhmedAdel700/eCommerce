@@ -45,9 +45,15 @@ export default function Footer() {
             <Link to="sign-up">
               <p>Login / Register</p>
             </Link>
-            <p>Cart</p>
-            <p>Wishlist</p>
-            <p>Shop</p>
+            <Link to='cart'>
+              <p>Cart</p>
+            </Link>
+            <Link to='wish-list'>
+              <p>Wishlist</p>
+            </Link>
+            <Link to='products'>
+              <p>Shop</p>
+            </Link>
           </Stack>
         </Grid>
         <Grid item xs={12} sm={6} md={2} lg={2}>

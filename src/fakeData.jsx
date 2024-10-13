@@ -95,12 +95,12 @@ export const menuItems = [
   {
     icon: <LocalMallOutlinedIcon />,
     label: "My Order",
-    link: ".",
+    link: "cart",
   },
   {
     icon: <HighlightOffIcon />,
     label: "My Cancellations",
-    link: ".",
+    link: "wish-list",
   },
   {
     icon: <StarBorderRoundedIcon />,

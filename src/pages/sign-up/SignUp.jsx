@@ -7,7 +7,6 @@ import { isLoggedIn, changeDirection } from "../../store/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import "./signUp.css";
-import ScrollToTopButton from "../../components/ScrollToTopButton";
 
 export default function SginUp() {
   const dispatch = useDispatch();
@@ -185,7 +184,6 @@ export default function SginUp() {
           )}
         </Box>
       </Stack>
-      <ScrollToTopButton />
     </section>
   );
 }

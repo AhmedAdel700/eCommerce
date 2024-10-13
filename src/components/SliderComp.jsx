@@ -101,6 +101,10 @@ export default function SliderComp({
     }
   };
 
+  function isProductInCart(productId) {
+    return cartData.some((item) => item.id === productId);
+  }
+
   const renderedProducts = products?.products?.map((product) => {
     return (
       <div key={product.id} className="product">
@@ -151,10 +155,8 @@ export default function SliderComp({
                   textAlign: "center",
                 }}
               >
-                {cartIcon && (
-                  <ShoppingCartOutlinedIcon sx={{ marginRight: "0.3rem" }} />
-                )}
-                Add To Cart
+                <ShoppingCartOutlinedIcon sx={{ marginRight: "0.3rem" }} />
+                {isProductInCart(product.id) ? "In Cart" : "Add To Cart"}
               </Button>
             </div>
           )}

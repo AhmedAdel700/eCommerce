@@ -2,7 +2,6 @@ import { Box, Stack } from "@mui/material";
 import { Link } from "react-router-dom";
 import "./about.css";
 import Benefits from "../../components/Benefits";
-import ScrollToTopButton from "../../components/ScrollToTopButton";
 
 export default function About() {
   const arrayOfServices = [
@@ -146,7 +145,7 @@ export default function About() {
       </Stack>
 
       <Benefits />
-      <ScrollToTopButton />
+
     </section>
   );
 }

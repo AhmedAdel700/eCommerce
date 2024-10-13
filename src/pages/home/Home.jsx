@@ -19,7 +19,6 @@ import { Link } from "react-router-dom";
 
 import { useEffect, useRef, useState } from "react";
 import Benefits from "../../components/Benefits";
-import ScrollToTopButton from "../../components/ScrollToTopButton";
 import SliderComp from "../../components/SliderComp";
 import "./home.css";
 
@@ -44,7 +43,7 @@ export default function Home() {
 
   const ladningLinks = arrayOfLinks.map((link) => {
     return (
-      <Link to={link.path} key={link.name}>
+      <Link to={"products"} key={link.name}>
         <Box className="landing-links">
           {link.name} {link.icon}
         </Box>
@@ -111,7 +110,9 @@ export default function Home() {
                 to="/"
                 style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}
               >
-                <h4 className="shop-now">Shop Now</h4>
+                <Link to="products" className="shop-now">
+                  Shop Now
+                </Link>
                 <ArrowForwardIcon className="arrow" />
               </Link>
             </Stack>
@@ -218,7 +219,7 @@ export default function Home() {
           />
         )}
 
-        <Link to={"about"} style={{ margin: "0 auto" }}>
+        <Link to={"products"} style={{ margin: "0 auto" }}>
           <Button
             variant="contained"
             sx={{
@@ -315,7 +316,7 @@ export default function Home() {
           </Stack>
 
           <Stack>
-            <Link to={"about"} style={{ margin: "0 auto" }}>
+            <Link to={"products"} style={{ margin: "0 auto" }}>
               <Button
                 variant="contained"
                 sx={{
@@ -375,19 +376,21 @@ export default function Home() {
             </Box>
           </Box>
 
-          <Button
-            variant="contained"
-            sx={{
-              backgroundColor: "#00FF66",
-              textTransform: "capitalize",
-              width: "171px",
-              height: "56px",
-              fontSize: "1rem",
-              marginTop: "2rem",
-            }}
-          >
-            Buy Now!
-          </Button>
+          <Link to={"products"}>
+            <Button
+              variant="contained"
+              sx={{
+                backgroundColor: "#00FF66",
+                textTransform: "capitalize",
+                width: "171px",
+                height: "56px",
+                fontSize: "1rem",
+                marginTop: "2rem",
+              }}
+            >
+              Buy Now!
+            </Button>
+          </Link>
         </Stack>
 
         <Box className="music-right-side">
@@ -456,7 +459,7 @@ export default function Home() {
           </Box>
         )}
 
-        <Link to={"about"} style={{ margin: "0 auto" }}>
+        <Link to={"products"} style={{ margin: "0 auto" }}>
           <Button
             variant="contained"
             sx={{
@@ -554,7 +557,6 @@ export default function Home() {
       </section>
 
       <Benefits />
-      <ScrollToTopButton />
     </main>
   );
 }

@@ -7,20 +7,25 @@ import { useEffect } from "react";
 import { addLimitedProducts } from "../../store/productSlice";
 import { removeFromWishlist, toggleLike } from "../../store/wishlistSlice";
 import SliderComp from "../../components/SliderComp";
-import "./wishlist.css";
 import { addToCart } from "../../store/cartSlice";
+import "./wishlist.css";
 
 export default function Wishlist() {
   const { wishlist } = useSelector((state) => state.wishlist);
   const { loading, error, limitedProducts } = useSelector(
     (state) => state.products
   );
+  const { cartData } = useSelector((state) => state.cart);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(addLimitedProducts({ limit: 4, page: 30 }));
   }, [dispatch]);
+
+  function isProductInCart(productId) {
+    return cartData.some((item) => item.id === productId);
+  }
 
   const items = wishlist.map((item) => {
     return (
@@ -60,7 +65,7 @@ export default function Wishlist() {
               backgroundColor: "var(--dark-color)",
             }}
           >
-            Add To Cart
+            {isProductInCart(item.id) ? "In Cart" : "Add To Cart"}
           </Button>
         </Box>
 

@@ -4,10 +4,10 @@ import CloseIcon from "@mui/icons-material/Close";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { checkout } from "../../store/authSlice";
-import { removeItemFromCart } from "../../store/cartSlice";
+import { clearCart, removeItemFromCart } from "../../store/cartSlice";
 import "./cart.css";
 
 export default function Cart() {
@@ -16,31 +16,68 @@ export default function Cart() {
   const dispatch = useDispatch();
 
   const [updated, setUpdated] = useState(false);
-  const [quantity, setQuantity] = useState(1);
+  const [quantities, setQuantities] = useState([]);
+  const [total, setTotal] = useState(0);
+
+  // Initialize quantities based on cartData
+  useEffect(() => {
+    if (cartData) {
+      const initialQuantities = cartData.map((item) => ({
+        id: item.id,
+        number: 1, // Default to 1 if you want each item to start with a quantity of 1
+      }));
+      setQuantities(initialQuantities);
+    }
+  }, [cartData]);
+
+  // Function to update quantity by id
+  const updateQuantity = (id, delta) => {
+    setQuantities((prevQuantities) =>
+      prevQuantities.map((item) =>
+        item.id === id
+          ? { ...item, number: Math.max(item.number + delta, 0) } // Ensure the quantity doesn't go below 0
+          : item
+      )
+    );
+  };
+
+  // Recalculate total whenever quantities or cartData change
+  useEffect(() => {
+    const newTotal = quantities.reduce((sum, quantity) => {
+      const item = cartData.find((item) => item.id === quantity.id);
+      if (item) {
+        const itemPrice = item.price - item.price * (item.discount / 100);
+        return sum + itemPrice * quantity.number;
+      }
+      return sum;
+    }, 0);
+    setTotal(newTotal.toFixed(2));
+  }, [quantities, cartData]);
 
   function removerAlert() {
-    updated &&
+    if (updated) {
       setTimeout(() => {
         setUpdated(false);
       }, 1500);
+    }
   }
 
   removerAlert();
 
   function truncateText(text = "", maxLength) {
     if (text.length > maxLength) {
-      return text.substring(0, maxLength);
+      return text.substring(0, maxLength) + "...";
     }
     return text;
   }
 
   const renderCartItems = cartData?.map((item) => {
+    const quantity = quantities.find((q) => q.id === item.id)?.number || 0;
     return (
       <Box key={item.id} className="cart-single-item">
         <Stack className="img-title" direction={"row"}>
           <Box className="cart-image">
             <img src={item.image} alt={item.title} />
-
             <Box
               className="delete-from-cart"
               onClick={() => dispatch(removeItemFromCart(item.id))}
@@ -69,15 +106,11 @@ export default function Cart() {
           <Stack>
             <KeyboardArrowUpIcon
               sx={{ cursor: "pointer" }}
-              onClick={() => {
-                setQuantity((prev) => prev + 1);
-              }}
+              onClick={() => updateQuantity(item.id, 1)}
             />
             <KeyboardArrowDownIcon
               sx={{ cursor: "pointer" }}
-              onClick={() => {
-                quantity && setQuantity((prev) => prev - 1);
-              }}
+              onClick={() => updateQuantity(item.id, -1)}
             />
           </Stack>
         </Stack>
@@ -85,8 +118,9 @@ export default function Cart() {
         <Box>
           <p>
             $
-            {parseFloat(
-              item.price - item.price * (item.discount / 100)
+            {(
+              quantity *
+              parseFloat(item.price - item.price * (item.discount / 100))
             ).toFixed(2)}
           </p>
         </Box>
@@ -99,18 +133,36 @@ export default function Cart() {
       <Stack
         direction={"row"}
         alignItems={"center"}
-        className="link-single-product"
+        justifyContent={"space-between"}
       >
-        <Link
-          to="/"
-          style={{
-            color: "var(--text-color)",
-            marginRight: "10px",
-          }}
-        >
-          Home
-        </Link>
-        / Cart
+        <Stack direction={"row"} alignItems={"center"}>
+          <Link
+            to="/"
+            style={{
+              color: "var(--text-color)",
+              marginRight: "10px",
+            }}
+          >
+            Home
+          </Link>
+          / Cart
+        </Stack>
+
+        {cartData.length > 0 && (
+          <Button
+            type="button"
+            onClick={() => dispatch(clearCart())}
+            sx={{
+              backgroundColor: "#000",
+              textTransform: "capitalize",
+              fontWeight: "600",
+              lineHeight: "2",
+            }}
+            variant="contained"
+          >
+            Empty Your Cart
+          </Button>
+        )}
       </Stack>
 
       <Stack className="cart-items" justifyContent={"center"}>
@@ -141,7 +193,7 @@ export default function Cart() {
               severity="success"
               sx={{ fontWeight: "600", fontSize: "0.83rem" }}
             >
-              Cart Has Been Updated Successfully !
+              Cart Has Been Updated Successfully!
             </Alert>
           </Stack>
         )}
@@ -177,7 +229,7 @@ export default function Cart() {
             gap={1}
           >
             <p>Subtotal</p>
-            <p>$1750</p>
+            <p>${total}</p>
           </Stack>
 
           <hr />
@@ -201,17 +253,17 @@ export default function Cart() {
             gap={1}
           >
             <p>Total:</p>
-            <p>$1750</p>
+            <p>${total}</p>
           </Stack>
 
-          <Link to={isAuthenticated ? "/" : "/sign-up"}>
+          <Link to={isAuthenticated ? "checkout" : "/sign-up"}>
             <Button
               onClick={() => dispatch(checkout())}
               type="button"
               variant="contained"
               className="checkout"
             >
-              Procees to checkout
+              Proceed to checkout
             </Button>
           </Link>
         </Stack>
