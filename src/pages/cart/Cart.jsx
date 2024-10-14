@@ -82,15 +82,19 @@ export default function Cart() {
     const quantity = quantities.find((q) => q.id === item.id)?.number || 0;
     return (
       <Box key={item.id} className="cart-single-item">
-        <Stack className="img-title" direction={"row"}>
+        <Stack
+          className="img-title"
+          direction={"row"}
+          style={{ position: "relative" }}
+        >
+          <Box
+            className="delete-from-cart"
+            onClick={() => dispatch(removeItemFromCart(item.id))}
+          >
+            <CloseIcon />
+          </Box>
           <Box className="cart-image">
             <img src={item.image} alt={item.title} />
-            <Box
-              className="delete-from-cart"
-              onClick={() => dispatch(removeItemFromCart(item.id))}
-            >
-              <CloseIcon />
-            </Box>
           </Box>
           <Box className="item-cart-name">{truncateText(item.title, 15)}</Box>
         </Stack>
