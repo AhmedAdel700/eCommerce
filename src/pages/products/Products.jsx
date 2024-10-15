@@ -55,7 +55,7 @@ export default function Products() {
   function renderCategory(n) {
     const categoryItems = allCategories[n]?.products.map((product) => {
       return (
-        <div key={product.id} className="item">
+        <div key={product.id} className="item" data-aos="fade-up">
           <div className="product-img">
             {product.discount && (
               <div className="discount">
@@ -150,7 +150,7 @@ export default function Products() {
 
   const renderCategories = arrayOfStacks.map((stack, index) => {
     return (
-      <Stack gap={4} key={index}>
+      <Stack gap={4} key={index} >
         <Stack gap={2} direction={"row"} alignItems={"center"}>
           <div className="red"></div>
           <h4 style={{ color: "var(--red-color)", fontWeight: "600" }}>
@@ -175,6 +175,7 @@ export default function Products() {
 
   return (
     <section
+      data-aos="fade-right"
       className="all-products"
       style={{
         position: "relative",

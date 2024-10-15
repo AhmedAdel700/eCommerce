@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 export default function NotFound() {
   return (
-    <Box className="not-found">
+    <Box className="not-found" data-aos="fade-right">
       <Stack
         direction={"row"}
         alignItems={"center"}

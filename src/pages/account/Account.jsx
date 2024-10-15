@@ -12,7 +12,7 @@ export function loader(isAuthenticated) {
 
 export default function Account() {
   return (
-    <section className="account">
+    <section className="account" data-aos="fade-right">
       <Stack
         direction={"row"}
         alignItems={"center"}
@@ -161,8 +161,6 @@ export default function Account() {
           </form>
         </Stack>
       </Stack>
-
-
     </section>
   );
 }

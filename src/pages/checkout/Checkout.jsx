@@ -55,7 +55,7 @@ export default function Checkout() {
   });
 
   return (
-    <section className="checkout-page">
+    <section className="checkout-page" data-aos="fade-right">
       <Stack gap={1} className="checkout-left-side">
         <Stack
           direction={"row"}

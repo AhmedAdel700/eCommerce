@@ -45,13 +45,13 @@ export default function Footer() {
             <Link to="sign-up">
               <p>Login / Register</p>
             </Link>
-            <Link to='cart'>
+            <Link to="cart">
               <p>Cart</p>
             </Link>
-            <Link to='wish-list'>
+            <Link to="wish-list">
               <p>Wishlist</p>
             </Link>
-            <Link to='products'>
+            <Link to="products">
               <p>Shop</p>
             </Link>
           </Stack>

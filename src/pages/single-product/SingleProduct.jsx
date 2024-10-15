@@ -316,7 +316,7 @@ export default function SingleProduct() {
   }
 
   return (
-    <section className="single-product">
+    <section className="single-product" data-aos="fade-right">
       <Stack
         direction={"row"}
         alignItems={"center"}

@@ -140,7 +140,7 @@ export default function Cart() {
   });
 
   return (
-    <section className="cart-page">
+    <section className="cart-page" data-aos="fade-right">
       <Stack
         direction={"row"}
         alignItems={"center"}

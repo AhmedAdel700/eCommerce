@@ -62,7 +62,7 @@ export default function Category() {
 
   const renderCategory = cateData?.products?.map((product) => {
     return (
-      <div key={product.id} className="item">
+      <div key={product.id} className="item" data-aos="fade-up">
         <div className="product-img">
           {product.discount && (
             <div className="discount">
@@ -145,6 +145,7 @@ export default function Category() {
 
   return (
     <section
+      data-aos="fade-right"
       className="all-products"
       style={{
         position: "relative",

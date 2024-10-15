@@ -29,7 +29,12 @@ export default function Benefits() {
     );
   });
   return (
-    <Stack direction={"row"} justifyContent={"center"} className="our-benefits">
+    <Stack
+      direction={"row"}
+      justifyContent={"center"}
+      className="our-benefits"
+      data-aos="fade-right"
+    >
       {benefits}
     </Stack>
   );

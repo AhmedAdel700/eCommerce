@@ -98,6 +98,7 @@ export default function Wishlist() {
       <main className="items">{items}</main>
 
       <section
+        data-aos="fade-right"
         className="just-for-you"
         style={{
           maxWidth: "100%",

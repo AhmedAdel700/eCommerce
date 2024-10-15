@@ -37,7 +37,7 @@ export default function Contact() {
   };
 
   return (
-    <section className="contact">
+    <section className="contact" data-aos="fade-right">
       <Stack direction={"row"} alignItems={"center"} className="link">
         <Link
           to="/"

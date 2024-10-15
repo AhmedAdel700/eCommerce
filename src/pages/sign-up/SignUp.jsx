@@ -47,7 +47,7 @@ export default function SginUp() {
   }
 
   return (
-    <section className="sign-up">
+    <section className="sign-up" data-aos="fade-right">
       <Box className="phone-img">
         <img src="../images/Side-Image.png" alt="phone pic" />
       </Box>

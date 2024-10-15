@@ -23,13 +23,24 @@ import Cart from "./pages/cart/Cart";
 import Checkout, { loader as checkoutLoader } from "./pages/checkout/Checkout";
 import Category from "./pages/category/Category";
 
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 // Css Main Style Sheet
 import "./App.css";
 
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 export default function App() {
   const { isAuthenticated } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: true,
+    });
+  }, []);
 
   const router = createBrowserRouter(
     createRoutesFromElements(

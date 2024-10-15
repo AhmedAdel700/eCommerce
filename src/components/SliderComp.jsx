@@ -212,7 +212,7 @@ export default function SliderComp({
   });
 
   return (
-    <div className="slider-container">
+    <div className="slider-container" data-aos="fade-right">
       <Slider ref={slider} {...settings}>
         {renderedProducts}
         {renderedCategories}

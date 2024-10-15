@@ -71,7 +71,7 @@ export default function Home() {
         </Stack>
       )}
 
-      <section className="landing">
+      <section className="landing" data-aos="fade-down">
         <div className={open ? "landing-left-side open" : "landing-left-side"}>
           {smallScreens && (
             <ArrowOutwardIcon
@@ -140,6 +140,7 @@ export default function Home() {
 
       {/* Start Of Products Sales Section */}
       <section
+        data-aos="fade-right"
         className="products"
         style={{
           maxWidth: "100%",
@@ -240,6 +241,7 @@ export default function Home() {
 
       {/* Start Of Category Section */}
       <section
+        data-aos="fade-right"
         className="products"
         style={{
           maxWidth: "100%",
@@ -293,6 +295,7 @@ export default function Home() {
 
       {/* Start Of Category Section */}
       <section
+        data-aos="fade-right"
         className="products"
         style={{
           maxWidth: "100%",
@@ -352,7 +355,7 @@ export default function Home() {
       </section>
 
       {/* Start Of Music Experience Section */}
-      <section className="music">
+      <section className="music" data-aos="fade-right">
         <Stack gap={3} className="music-left-side">
           <h4 style={{ color: "#00FF66" }}>Categories</h4>
           <h2>Enhance Your Music Experience</h2>
@@ -393,7 +396,7 @@ export default function Home() {
           </Link>
         </Stack>
 
-        <Box className="music-right-side">
+        <Box className="music-right-side" data-aos="fade-down">
           <img src="../images/music.png" alt="speaker pic" />
         </Box>
       </section>
@@ -402,6 +405,7 @@ export default function Home() {
 
       <section
         className="products"
+        data-aos="fade-right"
         style={{
           maxWidth: "100%",
           position: "relative",
@@ -478,6 +482,7 @@ export default function Home() {
 
       {/* Start Of Featured Section */}
       <section
+        data-aos="fade-right"
         className="featured"
         style={{
           maxWidth: "100%",

@@ -81,7 +81,7 @@ export default function About() {
   });
 
   return (
-    <section className="about">
+    <section className="about" data-aos="fade-right">
       <Stack direction={"row"} alignItems={"center"} className="link">
         <Link
           to="/"
@@ -145,7 +145,6 @@ export default function About() {
       </Stack>
 
       <Benefits />
-
     </section>
   );
 }
