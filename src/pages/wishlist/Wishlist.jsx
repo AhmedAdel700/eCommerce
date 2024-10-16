@@ -49,7 +49,11 @@ export default function Wishlist() {
           )}
 
           <Button
-            onClick={() => dispatch(addToCart(item))}
+            onClick={() => {
+              dispatch(addToCart(item));
+              dispatch(removeFromWishlist(item.id));
+              dispatch(toggleLike(item.id));
+            }}
             startIcon={
               <ShoppingCartOutlinedIcon
                 sx={{ fontSize: "1.4rem !important" }}
@@ -81,6 +85,14 @@ export default function Wishlist() {
     );
   });
 
+  function moveAllToBag() {
+    wishlist.map((item) => {
+      dispatch(removeFromWishlist(item.id));
+      dispatch(addToCart(item));
+      dispatch(toggleLike(item.id));
+    });
+  }
+
   return (
     <section className="wishlist">
       <Stack
@@ -92,7 +104,9 @@ export default function Wishlist() {
       >
         <h3>Wishlist ({wishlist.length}) </h3>
 
-        <Button className="add-to-bag">Move All To Bag</Button>
+        <Button className="add-to-bag" onClick={() => moveAllToBag()}>
+          Move All To Bag
+        </Button>
       </Stack>
 
       <main className="items">{items}</main>
@@ -120,9 +134,9 @@ export default function Wishlist() {
             Just For You
           </h4>
 
-          <Button className="see-all-wish-list">
-            <Link to="/products">See All</Link>
-          </Button>
+          <Link to="/products" style={{ marginLeft: "auto" }}>
+            <Button className="see-all-wish-list">See All</Button>
+          </Link>
         </Stack>
 
         {/* Render The Slider Data => The Products*/}
